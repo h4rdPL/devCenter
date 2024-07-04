@@ -1,0 +1,17 @@
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\bin\Debug\net8.0\DevCenter.Infrastructure.deps.json
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\bin\Debug\net8.0\DevCenter.Infrastructure.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\bin\Debug\net8.0\DevCenter.Infrastructure.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.AssemblyInfoInputs.cache
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.AssemblyInfo.cs
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.csproj.CoreCompileInputs.cache
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\refint\DevCenter.Infrastructure.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\ref\DevCenter.Infrastructure.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\bin\Debug\net8.0\DevCenter.Application.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\bin\Debug\net8.0\DevCenter.Domain.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\bin\Debug\net8.0\DevCenter.Application.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\bin\Debug\net8.0\DevCenter.Domain.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.csproj.AssemblyReference.cache
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.csproj.CopyComplete

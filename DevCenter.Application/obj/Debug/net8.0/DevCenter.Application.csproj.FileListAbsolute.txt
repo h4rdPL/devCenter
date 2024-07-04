@@ -1,0 +1,15 @@
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\bin\Debug\net8.0\DevCenter.Application.deps.json
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\bin\Debug\net8.0\DevCenter.Application.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\bin\Debug\net8.0\DevCenter.Application.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.AssemblyInfoInputs.cache
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.AssemblyInfo.cs
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.csproj.CoreCompileInputs.cache
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\refint\DevCenter.Application.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\ref\DevCenter.Application.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\bin\Debug\net8.0\DevCenter.Domain.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\bin\Debug\net8.0\DevCenter.Domain.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.csproj.AssemblyReference.cache
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.csproj.CopyComplete

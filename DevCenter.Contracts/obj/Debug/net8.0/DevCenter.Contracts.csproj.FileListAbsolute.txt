@@ -1,0 +1,11 @@
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\bin\Debug\net8.0\DevCenter.Contracts.deps.json
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\bin\Debug\net8.0\DevCenter.Contracts.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\bin\Debug\net8.0\DevCenter.Contracts.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.AssemblyInfoInputs.cache
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.AssemblyInfo.cs
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.csproj.CoreCompileInputs.cache
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\obj\Debug\net8.0\refint\DevCenter.Contracts.dll
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.pdb
+C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Contracts\obj\Debug\net8.0\ref\DevCenter.Contracts.dll
