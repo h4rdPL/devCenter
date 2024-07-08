@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1GpCXbBhVfjRJUEigu+kS9a6s1NsIaUjRAu14SX0npZR8HOWKgXuo5UdkYdEXyxYgnq+eeQndSswoVIwSu/ZzA==",
+  "dgSpecHash": "/X9zY+LrqB+J2IpcxKShwjBSF80E1S84zJZaN3v57xcZlyAqFiBtTUfugGSXwv6AiBbV33UBPisp+pbBGvIWzw==",
   "success": true,
-  "projectFilePath": "C:\\_programowanie\\dotNET\\DevCenter\\DevCenter\\DevCenter.Contracts\\DevCenter.Contracts.csproj",
+  "projectFilePath": "C:\\_programowanie\\devCenter\\DevCenter.Contracts\\DevCenter.Contracts.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

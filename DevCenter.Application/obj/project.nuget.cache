@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Dx+uulsnyoWg3pgcNnYplyF/Qd3hpEHE6lmr1GpFB+BBApQbpJhrRI/yYRlz7lSQWfAT/fbfEwvhpzZ9sdPVdA==",
+  "dgSpecHash": "T2NxJF3chWewDewySya34OcYEVibWp0kyEIOknIwTTr8MSom2R1G50a+yGOAG5q11+iq1XV0dCsbq8IMDbKPYg==",
   "success": true,
-  "projectFilePath": "C:\\_programowanie\\dotNET\\DevCenter\\DevCenter\\DevCenter.Application\\DevCenter.Application.csproj",
+  "projectFilePath": "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

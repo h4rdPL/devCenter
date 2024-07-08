@@ -9,3 +9,15 @@ C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Domain\obj\Debug\net8.0\D
 C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Domain\obj\Debug\net8.0\refint\DevCenter.Domain.dll
 C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Domain\obj\Debug\net8.0\DevCenter.Domain.pdb
 C:\_programowanie\dotNET\DevCenter\DevCenter\DevCenter.Domain\obj\Debug\net8.0\ref\DevCenter.Domain.dll
+C:\_programowanie\devCenter\DevCenter.Domain\bin\Debug\net8.0\DevCenter.Domain.deps.json
+C:\_programowanie\devCenter\DevCenter.Domain\bin\Debug\net8.0\DevCenter.Domain.dll
+C:\_programowanie\devCenter\DevCenter.Domain\bin\Debug\net8.0\DevCenter.Domain.pdb
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\DevCenter.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\DevCenter.Domain.AssemblyInfoInputs.cache
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\DevCenter.Domain.AssemblyInfo.cs
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\DevCenter.Domain.csproj.CoreCompileInputs.cache
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\DevCenter.Domain.sourcelink.json
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\DevCenter.Domain.dll
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\refint\DevCenter.Domain.dll
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\DevCenter.Domain.pdb
+C:\_programowanie\devCenter\DevCenter.Domain\obj\Debug\net8.0\ref\DevCenter.Domain.dll
