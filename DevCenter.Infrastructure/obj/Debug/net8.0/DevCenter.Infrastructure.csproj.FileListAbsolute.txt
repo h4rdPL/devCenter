@@ -28,10 +28,10 @@ C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.
 C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.AssemblyInfo.cs
 C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.csproj.CoreCompileInputs.cache
 C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.sourcelink.json
-C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCente.3EC56A1F.Up2Date
 C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.dll
 C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\refint\DevCenter.Infrastructure.dll
 C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.pdb
 C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\ref\DevCenter.Infrastructure.dll
 C:\_programowanie\devCenter\DevCenter.Infrastructure\bin\Debug\net8.0\DevCenter.Infrastructure.runtimeconfig.json
 C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.genruntimeconfig.cache
+C:\_programowanie\devCenter\DevCenter.Infrastructure\obj\Debug\net8.0\DevCenter.Infrastructure.csproj.CopyComplete

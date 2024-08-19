@@ -75,7 +75,6 @@ C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\staticwebassets\msbui
 C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.DevCenter.Api.props
 C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\staticwebassets.pack.json
 C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\scopedcss\bundle\DevCenter.Api.styles.css
-C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\DevCente.EC66A1B8.Up2Date
 C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\DevCenter.Api.dll
 C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\refint\DevCenter.Api.dll
 C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\DevCenter.Api.pdb
@@ -185,3 +184,10 @@ C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnal
 C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\_programowanie\devCenter\DevCenter.Api\obj\Debug\net8.0\DevCenter.Api.csproj.CopyComplete
+C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\DevOne.Security.Cryptography.BCrypt.dll
+C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\Castle.Core.dll
+C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\Moq.dll
+C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\_programowanie\devCenter\DevCenter.Api\bin\Debug\net8.0\libman.json

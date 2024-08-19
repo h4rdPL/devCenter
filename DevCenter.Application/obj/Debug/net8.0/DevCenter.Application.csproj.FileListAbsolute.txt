@@ -24,8 +24,8 @@ C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.App
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.AssemblyInfo.cs
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.csproj.CoreCompileInputs.cache
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.sourcelink.json
-C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCente.ED50DE19.Up2Date
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.dll
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\refint\DevCenter.Application.dll
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.pdb
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\ref\DevCenter.Application.dll
+C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.csproj.CopyComplete
