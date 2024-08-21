@@ -1,12 +1,12 @@
-<div align="center"> 
+<div align="center">
   <img src="coming_soon.png" alt="soon" />
 </div>
 
 ![Alt](https://repobeats.axiom.co/api/embed/9168f791329b344b2bbf0c52166a3fd2e7b84876.svg "Repobeats analytics image")
 
-## Job Search Platform
+## CRM Project
 
-Welcome to the Job Search Platform! This web application provides users with the ability to search for job offers across various categories. It allows job seekers to explore available job opportunities, view job details, and learn more about the roles and responsibilities associated with each job offer.
+More info soon
 
 ## Features
 
@@ -16,13 +16,12 @@ Welcome to the Job Search Platform! This web application provides users with the
 
 <img src="coming_soon.png" alt="soon" />
 
-
 ## Technologies Used
 
 <img src="coming_soon.png" alt="soon" />
 
-
 ## Setup
+
 To run the application locally, follow these steps:
 
 - Clone the repository.
@@ -42,4 +41,3 @@ To run the application locally, follow these steps:
 ## Additional Information
 
 <img src="coming_soon.png" alt="soon" />
-
