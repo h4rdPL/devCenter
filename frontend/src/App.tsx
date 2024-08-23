@@ -1,9 +1,10 @@
 import "./App.css";
+import { Reset } from "styled-reset";
 
 const App = () => {
   return (
     <>
-      <h1>frontend</h1>
+      <Reset />
     </>
   );
 };

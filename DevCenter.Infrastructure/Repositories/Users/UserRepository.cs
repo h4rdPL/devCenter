@@ -3,7 +3,6 @@ using DevCenter.Domain.Users;
 using DevCenter.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
 namespace DevCenter.Infrastructure.Repositories.Users
 {
     public class UserRepository : IUserRepository
@@ -14,6 +13,7 @@ namespace DevCenter.Infrastructure.Repositories.Users
         {
             _context = context;
         }
+
 
         public async Task Add(User user)
         {
@@ -31,7 +31,7 @@ namespace DevCenter.Infrastructure.Repositories.Users
         /// </summary>
         /// <param name="email">The email address of the user to retrieve.</param>
         /// <returns>
-        /// A <see cref="Task{TResult}"/> representing the asynchronous operation. The task result contains 
+        /// A <see cref="Task{TResult}"/> representing the asynchronous operation. The task result contains
         /// the <see cref="User"/> entity if found; otherwise, <c>null</c>.
         /// </returns>
         /// <exception cref="ArgumentException">
