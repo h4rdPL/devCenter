@@ -1,6 +1,8 @@
 <div align="center">
-  <img src="coming_soon.png" alt="soon" />
+  <img src="https://github.com/h4rdPL/devCenter/blob/main/frontend/src/assets/logo.svg" alt="soon" />
 </div>
+
+<br />
 
 ![Alt](https://repobeats.axiom.co/api/embed/9168f791329b344b2bbf0c52166a3fd2e7b84876.svg "Repobeats analytics image")
 
