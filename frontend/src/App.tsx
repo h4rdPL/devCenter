@@ -1,10 +1,10 @@
-import "./App.css";
-import { Reset } from "styled-reset";
+import GlobalStyle from "./styles/GlobalStyle";
 
 const App = () => {
   return (
     <>
-      <Reset />
+      <GlobalStyle />
+      <h1>Dev Center</h1>
     </>
   );
 };
