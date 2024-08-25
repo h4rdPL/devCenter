@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/h4rdPL/devCenter/blob/main/frontend/src/assets/logo.svg" alt="soon" />
+  <img src="https://github.com/h4rdPL/devCenter/blob/main/frontend/src/assets/images/logo.svg" alt="soon" />
 </div>
 
 <br />
