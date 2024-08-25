@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
-    body {
+    body, button {
         font-family: "Nunito Sans", sans-serif;
     }
 `;

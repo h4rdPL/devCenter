@@ -40,7 +40,7 @@ const IconWrapper = styled.div`
   padding-bottom: 2rem;
 `;
 
-const Homepage = () => {
+const Homepage: React.FC = () => {
   return (
     <HomepageWrapper>
       <CenteredContent>
