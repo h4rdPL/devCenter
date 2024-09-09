@@ -8,29 +8,43 @@ import Homepage from "./pages/homepage/homepage";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme/theme";
 import Login from "./pages/login/login";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import Dashboard from "./pages/dashboard/dashboard";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-]);
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>
-);
+if (clientId) {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Homepage />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
+    },
+  ]);
+
+  root.render(
+    <GoogleOAuthProvider clientId={clientId}>
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+          <App />
+        </ThemeProvider>
+      </React.StrictMode>
+    </GoogleOAuthProvider>
+  );
+} else {
+  console.error("Client ID is not defined");
+}
 
 reportWebVitals();

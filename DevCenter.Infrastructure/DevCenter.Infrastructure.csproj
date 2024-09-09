@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DevCenter.Application\DevCenter.Application.csproj" />
+    <ProjectReference Include="..\DevCenter.Domain\DevCenter.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -11,6 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -60,6 +60,10 @@
             "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -173,6 +177,9 @@
             "projectReferences": {
               "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj": {
                 "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj"
+              },
+              "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
+                "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj"
               }
             }
           }
@@ -200,6 +207,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.6, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

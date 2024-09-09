@@ -55,9 +55,33 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AspNet.Security.OAuth.Validation": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Auth0.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[1.4.1, )"
+            },
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "CQRS.Core": {
+              "target": "Package",
+              "version": "[1.0.4600.39731, )"
+            },
+            "Convey.WebApi.CQRS": {
+              "target": "Package",
+              "version": "[1.1.448, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.68.0, )"
+            },
+            "Microsoft.AspNet.Identity.EntityFramework": {
+              "target": "Package",
+              "version": "[2.2.4, )"
             },
             "Microsoft.AspNetCore.Authentication.Cookies": {
               "target": "Package",
@@ -67,9 +91,21 @@
               "target": "Package",
               "version": "[8.0.8, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.1.39, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[8.0.8, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -92,6 +128,10 @@
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.SqlServer.SqlManagementObjects": {
+              "target": "Package",
+              "version": "[171.30.0, )"
             },
             "Moq": {
               "target": "Package",
@@ -181,6 +221,10 @@
             "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -354,6 +398,9 @@
             "projectReferences": {
               "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj": {
                 "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj"
+              },
+              "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
+                "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj"
               }
             }
           }
@@ -381,6 +428,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.6, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

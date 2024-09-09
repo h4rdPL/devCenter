@@ -1,7 +1,10 @@
+import React from "react";
 import styled from "styled-components";
-import Google from "../../assets/images/google.svg";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 import LoginIcon from "../../assets/images/loginIcon.svg";
-
+import Google from "../../assets/images/google.svg";
 const LoginWrapper = styled.section`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.white};
@@ -20,7 +23,6 @@ const LoginForm = styled.form`
   margin: 0 auto;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const Icon = styled.img`
@@ -42,7 +44,6 @@ const GoogleButton = styled.button`
   margin-bottom: 15px;
   background-color: transparent;
   color: white;
-  border: 1px solid ${({ theme }) => theme.white};
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
@@ -136,15 +137,33 @@ const LoginButton = styled.button`
 `;
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSuccess = async (credentialResponse: any) => {
+    try {
+      const token = credentialResponse?.credential;
+      if (!token) {
+        throw new Error("No token provided");
+      }
+
+      const decoded: any = jwtDecode(token);
+
+      navigate("/dashboard", { state: { userData: decoded } });
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  const handleError = () => {
+    console.log("Login Failed");
+  };
   return (
     <LoginWrapper>
       <LoginForm>
         <Icon src={LoginIcon} alt="loginIcon" />
         <Title>Login to your Account</Title>
-        <GoogleButton>
-          <GoogleIcon src={Google} alt="Google icon" />
-          Continue with Google
-        </GoogleButton>
+        {/* <GoogleIcon src={Google} alt="Google icon" /> */}
+        <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
         <Text>Or Sign in with Email address</Text>
         <Label htmlFor="email">Email</Label>
         <Input type="text" placeholder="Email" />

@@ -1,44 +1,62 @@
-using DevCenter.Application.Users;
-using DevCenter.Domain.Users;
+using DevCenter.Application;
+using DevCenter.Infrastructure;
 using DevCenter.Infrastructure.Data;
-using DevCenter.Infrastructure.Repositories.Users;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure servicesrgh
 var services = builder.Services;
-var configuration = builder.Configuration;
 
+// Configure services
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 services.AddControllers();
 
-// Dependency Injection for custom services and repositories
-services.AddScoped<UserServices>();
-services.AddScoped<IUserRepository, UserRepository>();
+// Dependency Injection
+services.AddApplication().AddInfrastructure(builder.Configuration);
 
 
-// Authentication configuration
-services.AddAuthentication(options =>
+// Swagger configuration
+services.AddSwaggerGen(options =>
 {
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "DevCenter API", Version = "v1" });
+});
+
+
+services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddCookie()
-.AddGoogle(googleOptions =>
+.AddCookie();
+
+
+//Cookie Policy needed for External Auth
+services.Configure<CookiePolicyOptions>(options =>
 {
-    googleOptions.ClientId = configuration["Authentication:Google:ClientId"] ?? string.Empty;
-    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"] ?? string.Empty;
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+});
+
+services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.WithOrigins("https://localhost:7234", "https://accounts.google.com", "http://localhost", "http://localhost:3000/*")
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .AllowCredentials();
+    });
 });
 
 
 // Database context configuration
 services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 var app = builder.Build();
@@ -47,22 +65,29 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(o =>
+    app.UseSwaggerUI(c =>
     {
-        o.OAuthClientId(configuration["SwaggerGoogleOauth:ClientId"]);
-        o.OAuthClientSecret(configuration["SwaggerGoogleOauth:Secret"]);
-        o.OAuthUsePkce();
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "DevCenter API v1");
+
     });
+
 }
 
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.Lax
+});
 
+
+
+// Use CORS policy
 app.UseRouting();
-app.UseHttpsRedirection();
-app.UseCors(it => it.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-app.UseAuthentication();
+app.UseCors("AllowAll");
 app.UseAuthorization();
-
-app.MapControllers();
-
+app.UseAuthentication();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.Run();

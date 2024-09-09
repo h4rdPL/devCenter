@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oox9xDYmWjY6ZR2MYZRP1QAUgkIQe666/BvOB/nKGzj+QiPHQaSxb6BK8kyu+0zkNNJrjiTuB0GEeI2l+g+Zvw==",
+  "dgSpecHash": "CXGyAmN3jRGRB05mGSAdUI1aHa4sQtteuTKYFEdr7BOQBMiOoS94CDTIrgt9j5BtqSf/Ql5xcB3uSBCop2WrNg==",
   "success": true,
   "projectFilePath": "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,8 @@
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.aspnetcore.mvc.abstractions\\2.2.0\\microsoft.aspnetcore.mvc.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.aspnetcore.routing.abstractions\\2.2.0\\microsoft.aspnetcore.routing.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.extensions.primitives\\2.2.0\\microsoft.extensions.primitives.2.2.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
