@@ -39,7 +39,7 @@ namespace DevCenter.Infrastructure.Repositories.Users
         /// </exception>
         public async Task<User?> GetUserByEmail(string email)
         {
-            if(email.IsNullOrEmpty())
+            if (string.IsNullOrWhiteSpace(email))
             {
                 throw new ArgumentException("Email cannot be null or empty", nameof(email));
             }
@@ -48,5 +48,6 @@ namespace DevCenter.Infrastructure.Repositories.Users
                                  .AsNoTracking()
                                  .FirstOrDefaultAsync(u => u.Email == email);
         }
+
     }
 }

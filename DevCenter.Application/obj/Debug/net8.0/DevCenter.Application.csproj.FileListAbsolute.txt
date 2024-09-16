@@ -29,3 +29,5 @@ C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\refint\DevCen
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.pdb
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\ref\DevCenter.Application.dll
 C:\_programowanie\devCenter\DevCenter.Application\obj\Debug\net8.0\DevCenter.Application.csproj.CopyComplete
+C:\_programowanie\devCenter\DevCenter.Application\bin\Debug\net8.0\DevCenter.Infrastructure.dll
+C:\_programowanie\devCenter\DevCenter.Application\bin\Debug\net8.0\DevCenter.Infrastructure.pdb

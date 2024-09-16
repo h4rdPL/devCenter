@@ -11,14 +11,11 @@ namespace DevCenter.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            // Register the ApplicationDbContext with the appropriate database provider
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection")));
 
-            // Register the repositories
             services.AddScoped<IUserRepository, UserRepository>();
-
             return services;
         }
     }

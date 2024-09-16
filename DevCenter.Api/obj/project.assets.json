@@ -4171,6 +4171,8 @@
           "BCrypt": "1.0.0",
           "BCrypt.Net-Next": "4.0.3",
           "DevCenter.Domain": "1.0.0",
+          "DevCenter.Infrastructure": "1.0.0",
+          "Google.Apis.Auth": "1.68.0",
           "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
           "Microsoft.Extensions.DependencyInjection": "8.0.0"
         },
@@ -4205,7 +4207,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "DevCenter.Application": "1.0.0",
           "DevCenter.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.6",

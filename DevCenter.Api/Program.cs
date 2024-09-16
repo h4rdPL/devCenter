@@ -3,53 +3,70 @@ using DevCenter.Infrastructure;
 using DevCenter.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-// Configure services
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 services.AddControllers();
 
-// Dependency Injection
-services.AddApplication().AddInfrastructure(builder.Configuration);
+services.AddApplication().AddInfrastructure(builder.Configuration).AddHttpContextAccessor();
 
 
-// Swagger configuration
 services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "DevCenter API", Version = "v1" });
 });
 
 
-services.AddAuthentication(x =>
+var audience = builder.Configuration["Jwt:Audience"];
+var accounts = builder.Configuration["Jwt:Accounts"];
+var signinKey = builder.Configuration["Jwt:SiginKey"];
+
+services.AddAuthentication(options =>
 {
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddCookie();
+.AddJwtBearer(options =>
+{
+    options.Authority = accounts;
+    options.Audience = audience;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = accounts,
+        ValidAudience = audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signinKey))
+    };
+});
 
 
-//Cookie Policy needed for External Auth
+
 services.Configure<CookiePolicyOptions>(options =>
 {
-    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
     options.CheckConsentNeeded = context => true;
     options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
 });
 
 services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
-    {
-        builder.WithOrigins("https://localhost:7234", "https://accounts.google.com", "http://localhost", "http://localhost:3000/*")
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials();
-    });
+    options.AddPolicy("AllowFrontendApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000", "http://localhost:3000/*") 
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
 });
 
 
@@ -80,11 +97,10 @@ app.UseCookiePolicy(new CookiePolicyOptions
 
 
 
-// Use CORS policy
 app.UseRouting();
-app.UseCors("AllowAll");
-app.UseAuthorization();
+app.UseCors("AllowFrontendApp");
 app.UseAuthentication();
+app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();

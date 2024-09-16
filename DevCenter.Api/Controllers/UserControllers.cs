@@ -1,17 +1,9 @@
 ﻿using DevCenter.Api.Dto;
 using DevCenter.Application.Users;
 using DevCenter.Domain.Entieties;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Text;
-using System.Text.Json;
 
 namespace DevCenter.Api.Controllers
 {
@@ -62,11 +54,90 @@ namespace DevCenter.Api.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
-
-
         }
+
+
+        [HttpPost("auth/google")]
+        public async Task<IActionResult> AuthenticateGoogle([FromBody] GoogleLoginDTO googleLoginDTO)
+        {
+            var token = googleLoginDTO.Token;
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest("Token is required.");
+            }
+
+            try
+            {
+                var user = await _userServices.AuthenticateGoogleUser(token);
+
+                if (user != null)
+                {
+                    return Ok(user); 
+                }
+                else
+                {
+                    return Unauthorized("Invalid Google token or user not saved.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [Authorize]
+        [HttpGet("counter")]
+        public async Task<IActionResult> GetCounter()
+        {
+            try
+            {
+                var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+
+                if (string.IsNullOrEmpty(emailClaim))
+                {
+                    return BadRequest("User email not found.");
+                }
+
+                Console.WriteLine($"Fetching counter for user with email: {emailClaim}");
+
+                var counter = await _userServices.GetCounterByEmail(emailClaim);
+                return Ok(counter);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [Authorize]
+        [HttpPost("counter")]
+        public async Task<IActionResult> UpdateCounter([FromBody] int incrementValue)
+        {
+            var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+
+            if (string.IsNullOrEmpty(emailClaim))
+            {
+                return Unauthorized("Email claim not found.");
+            }
+
+            var currentCounter = await _userServices.GetCounterByEmail(emailClaim);
+
+            var newCounterValue = currentCounter + incrementValue;
+
+            var success = await _userServices.UpdateCounter(emailClaim, newCounterValue);
+
+            return success ? Ok() : StatusCode(500, "Error updating counter");
+        }
+
+
+
 
 
     }
 
+    public class GoogleLoginDTO
+    {
+        public string Token { get; set; }
+    }
 }

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/logo.svg";
 import Youtube from "../../assets/images/youtube.svg";
 import X from "../../assets/images/x.svg";
 import Instagram from "../../assets/images/instagram.svg";
-import axios from "axios";
 
 const HomepageWrapper = styled.section`
   display: flex;
@@ -45,55 +44,6 @@ const IconWrapper = styled.div`
 const Homepage: React.FC = () => {
   const [email, setEmail] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       let token = localStorage.getItem("authToken");
-
-  //       if (!token) {
-  //         alert("You are not logged in. Please log in to continue.");
-  //         window.location.href = "/login"; // Replace with your login route
-  //         return;
-  //       }
-
-  //       const response = await axios.get(
-  //         "https://localhost:7234/api/User/signin-google",
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-
-  //       const { claims } = response.data;
-  //       console.log("Claims:", claims);
-
-  //       const emailClaim = claims.find(
-  //         (claim: { type: string }) =>
-  //           claim.type ===
-  //           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
-  //       );
-
-  //       if (emailClaim) {
-  //         setEmail(emailClaim.value);
-  //       } else {
-  //         setEmail(null);
-  //       }
-  //     } catch (error) {
-  //       if (axios.isAxiosError(error)) {
-  //         console.error(
-  //           "Error fetching data:",
-  //           error.response?.data || error.message
-  //         );
-  //       } else {
-  //         console.error("Error:", error);
-  //       }
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   return (
     <HomepageWrapper>
       <CenteredContent>
@@ -102,7 +52,7 @@ const Homepage: React.FC = () => {
           Wejdź do świata innowacji <br />
           <InnerHeading>Rozwiń swój biznes razem z nami</InnerHeading>
         </HomepageHeading>
-        {email && <p>Email: {email}</p>} {/* Display the email if available */}
+        {email && <p>Email: {email}</p>}
       </CenteredContent>
       <IconWrapper>
         <img src={Youtube} alt="Youtube Icon" />

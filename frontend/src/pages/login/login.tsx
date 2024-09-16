@@ -142,15 +142,37 @@ const Login: React.FC = () => {
   const handleSuccess = async (credentialResponse: any) => {
     try {
       const token = credentialResponse?.credential;
+      console.log(token);
       if (!token) {
         throw new Error("No token provided");
       }
 
+      // Save the token to localStorage
+      localStorage.setItem("token", token);
+
       const decoded: any = jwtDecode(token);
 
-      navigate("/dashboard", { state: { userData: decoded } });
+      const response = await fetch(
+        "https://localhost:7234/api/User/auth/google",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Token: token,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const userData = await response.json();
+        navigate("/dashboard", { state: { userData: decoded, ...userData } });
+      } else {
+        console.error("Error sending token to backend");
+      }
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Error during login process:", error);
     }
   };
 

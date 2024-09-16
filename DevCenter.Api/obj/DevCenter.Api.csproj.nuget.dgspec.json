@@ -196,6 +196,9 @@
             "projectReferences": {
               "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
                 "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj"
+              },
+              "C:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj": {
+                "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj"
               }
             }
           }
@@ -217,6 +220,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.68.0, )"
             },
             "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
@@ -396,9 +403,6 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj": {
-                "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj"
-              },
               "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
                 "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj"
               }
