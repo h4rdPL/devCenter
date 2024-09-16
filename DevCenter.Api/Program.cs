@@ -26,7 +26,7 @@ services.AddSwaggerGen(options =>
 
 var audience = builder.Configuration["Jwt:Audience"];
 var accounts = builder.Configuration["Jwt:Accounts"];
-var signinKey = builder.Configuration["Jwt:SiginKey"];
+var signinKey = builder.Configuration["Jwt:SigninKey"];
 
 services.AddAuthentication(options =>
 {
@@ -45,7 +45,7 @@ services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = accounts,
         ValidAudience = audience,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signinKey))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("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\r"))
     };
 });
 

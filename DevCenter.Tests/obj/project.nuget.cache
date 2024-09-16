@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "U14RvQsYeAW9TPjdj60TyiIFX6haKvMcqyzEjKUrjdU3NQBF0C3m2KBxQYdpKiGyhm8xA795sy0nWfhIYCNKSw==",
+  "dgSpecHash": "cMP1K6BbXKd956xYIn9lUWVtB3N9SnfcXBsOHMzgWgH9Mf2GptGuXPzHuSbhJdSN9agoQ2cVges4iWljUqtf0A==",
   "success": true,
   "projectFilePath": "C:\\_programowanie\\devCenter\\DevCenter.Tests\\DevCenter.Tests.csproj",
   "expectedPackageFiles": [
@@ -61,6 +61,7 @@
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.6\\microsoft.entityframeworkcore.8.0.6.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.6\\microsoft.entityframeworkcore.abstractions.8.0.6.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.6\\microsoft.entityframeworkcore.analyzers.8.0.6.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.0\\microsoft.entityframeworkcore.inmemory.7.0.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.6\\microsoft.entityframeworkcore.relational.8.0.6.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\8.0.6\\microsoft.entityframeworkcore.sqlserver.8.0.6.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

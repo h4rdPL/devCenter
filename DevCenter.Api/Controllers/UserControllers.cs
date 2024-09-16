@@ -1,9 +1,7 @@
 ﻿using DevCenter.Api.Dto;
 using DevCenter.Application.Users;
-using DevCenter.Domain.Entieties;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace DevCenter.Api.Controllers
 {
@@ -13,41 +11,29 @@ namespace DevCenter.Api.Controllers
     {
         private readonly UserServices _userServices;
         private readonly IConfiguration _configuration;
-        public UserController(UserServices userServices, IConfiguration configuration)
+        private readonly IUserClaimsService _userClaimsService;
+        public UserController(UserServices userServices, IConfiguration configuration, IUserClaimsService userClaimsService)
         {
             _userServices = userServices;
             _configuration = configuration;
+            _userClaimsService = userClaimsService;
         }
 
 
-        /// <summary>
-        /// Registers a new user in the system.
-        /// </summary>
-        /// <param name="user">The user details for registration.</param>
-        /// <returns>
-        /// A 201 Created response with the user's email if the registration is successful;
-        /// a 409 Conflict response if the user already exists;
-        /// or a 400 Bad Request response if registration fails.
-        /// </returns>
         [HttpPost("register")]
-        public async Task<ActionResult<User>> UserRegister([FromBody] UserDTO user)
+        public async Task<ActionResult<UserDTO>> UserRegister([FromBody] UserDTO user)
         {
             try
             {
-                var result = await _userServices.RegisterUser(
-                    user.Username,
-                    user.Email,
-                    user.Password,
-                    user.Role
-                );
+                var result = await _userServices.RegisterUser(user.Username, user.Email, user.Password, user.Role);
 
-                if (result.Success)
+                if (result.IsSuccess)
                 {
-                    return CreatedAtAction(nameof(UserRegister), new { email = user.Email }, result.Data);
+                    return CreatedAtAction(nameof(UserRegister), new { email = user.Email }, result.Value);
                 }
                 else
                 {
-                    return result.Message.Contains("already exists") ? Conflict(result.Message) : BadRequest(result.Message);
+                    return result.ErrorMessage.Contains("already exists") ? Conflict(result.ErrorMessage) : BadRequest(result.ErrorMessage);
                 }
             }
             catch (Exception ex)
@@ -55,7 +41,6 @@ namespace DevCenter.Api.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
 
         [HttpPost("auth/google")]
         public async Task<IActionResult> AuthenticateGoogle([FromBody] GoogleLoginDTO googleLoginDTO)
@@ -69,15 +54,15 @@ namespace DevCenter.Api.Controllers
 
             try
             {
-                var user = await _userServices.AuthenticateGoogleUser(token);
+                var result = await _userServices.AuthenticateGoogleUser(token);
 
-                if (user != null)
+                if (result.IsSuccess)
                 {
-                    return Ok(user); 
+                    return Ok(result.Value);
                 }
                 else
                 {
-                    return Unauthorized("Invalid Google token or user not saved.");
+                    return Unauthorized(result.ErrorMessage);
                 }
             }
             catch (Exception ex)
@@ -92,17 +77,16 @@ namespace DevCenter.Api.Controllers
         {
             try
             {
-                var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+                var emailClaim = await _userClaimsService.GetUserEmailClaimAsync(User);
 
                 if (string.IsNullOrEmpty(emailClaim))
                 {
                     return BadRequest("User email not found.");
                 }
 
-                Console.WriteLine($"Fetching counter for user with email: {emailClaim}");
+                var result = await _userServices.GetCounterByEmail(emailClaim);
 
-                var counter = await _userServices.GetCounterByEmail(emailClaim);
-                return Ok(counter);
+                return result.IsSuccess ? Ok(result.Value) : StatusCode(500, result.ErrorMessage);
             }
             catch (Exception ex)
             {
@@ -114,30 +98,32 @@ namespace DevCenter.Api.Controllers
         [HttpPost("counter")]
         public async Task<IActionResult> UpdateCounter([FromBody] int incrementValue)
         {
-            var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
-
-            if (string.IsNullOrEmpty(emailClaim))
+            try
             {
-                return Unauthorized("Email claim not found.");
+                var emailClaim = await _userClaimsService.GetUserEmailClaimAsync(User);
+
+                if (string.IsNullOrEmpty(emailClaim))
+                {
+                    return Unauthorized("Email claim not found.");
+                }
+
+                var currentCounterResult = await _userServices.GetCounterByEmail(emailClaim);
+
+                if (!currentCounterResult.IsSuccess)
+                {
+                    return StatusCode(500, currentCounterResult.ErrorMessage);
+                }
+
+                var newCounterValue = currentCounterResult.Value + incrementValue;
+                var updateResult = await _userServices.UpdateCounter(emailClaim, newCounterValue);
+
+                return updateResult.IsSuccess ? Ok() : StatusCode(500, updateResult.ErrorMessage);
             }
-
-            var currentCounter = await _userServices.GetCounterByEmail(emailClaim);
-
-            var newCounterValue = currentCounter + incrementValue;
-
-            var success = await _userServices.UpdateCounter(emailClaim, newCounterValue);
-
-            return success ? Ok() : StatusCode(500, "Error updating counter");
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
-
-
-
-
-    }
-
-    public class GoogleLoginDTO
-    {
-        public string Token { get; set; }
     }
 }
