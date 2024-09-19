@@ -1,12 +1,8 @@
 ﻿using DevCenter.Application.Users;
-using DevCenter.Domain.Entieties;
-using DevCenter.Domain.Enums.Users;
 using DevCenter.Domain.Users;
 using DevCenter.Infrastructure.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Xunit;
 
 namespace DevCenter.Tests.Domain.UsersTest
 {
