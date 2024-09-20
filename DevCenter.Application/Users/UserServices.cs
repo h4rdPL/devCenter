@@ -4,11 +4,10 @@ using DevCenter.Domain.Enums.Users;
 using DevCenter.Domain.Users;
 using DevCenter.Infrastructure.Data;
 using Google.Apis.Auth;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 namespace DevCenter.Application.Users
 {
-    public class UserServices
+    public class UserServices : IUserServices
     {
         private readonly IUserRepository _userRepository;
         private readonly ApplicationDbContext _context;

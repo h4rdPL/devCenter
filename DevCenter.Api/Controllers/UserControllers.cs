@@ -9,10 +9,10 @@ namespace DevCenter.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserServices _userServices;
+        private readonly IUserServices _userServices;
         private readonly IConfiguration _configuration;
         private readonly IUserClaimsService _userClaimsService;
-        public UserController(UserServices userServices, IConfiguration configuration, IUserClaimsService userClaimsService)
+        public UserController(IUserServices userServices, IConfiguration configuration, IUserClaimsService userClaimsService)
         {
             _userServices = userServices;
             _configuration = configuration;

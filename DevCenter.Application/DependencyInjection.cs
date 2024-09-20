@@ -7,7 +7,7 @@ namespace DevCenter.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<UserServices>();
+            services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IUserClaimsService, UserClaimsService>(); 
             return services;
         }
