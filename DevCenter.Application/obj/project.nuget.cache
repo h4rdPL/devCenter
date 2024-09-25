@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yt4snR8MzqXETugrd75UwAfEDu6cYT4NOu9reuNz7csQKXN9PEEXhmTgEAuZwO0n+GaojLb+G9Pox88QiqEoWg==",
+  "dgSpecHash": "3KG9rH0DEUXNQqqX5y9vjWcj5H04YgqrNX/uXkvTxGgsXmXDdb+3i0EkylhtMhFRAlJimEzDlOUXMi8zAi9InQ==",
   "success": true,
-  "projectFilePath": "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj",
+  "projectFilePath": "D:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

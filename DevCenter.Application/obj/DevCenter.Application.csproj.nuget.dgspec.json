@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj": {}
+    "D:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj": {}
   },
   "projects": {
-    "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj": {
+    "D:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj",
+        "projectUniqueName": "D:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj",
         "projectName": "DevCenter.Application",
-        "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj",
+        "projectPath": "D:\\_programowanie\\devCenter\\DevCenter.Application\\DevCenter.Application.csproj",
         "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\_programowanie\\devCenter\\DevCenter.Application\\obj\\",
+        "outputPath": "D:\\_programowanie\\devCenter\\DevCenter.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
-                "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj"
+              "D:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
+                "projectPath": "D:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj"
               },
-              "C:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj": {
-                "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj"
+              "D:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj": {
+                "projectPath": "D:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj"
               }
             }
           }
@@ -93,14 +93,14 @@
         }
       }
     },
-    "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
+    "D:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj",
+        "projectUniqueName": "D:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj",
         "projectName": "DevCenter.Domain",
-        "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj",
+        "projectPath": "D:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj",
         "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\obj\\",
+        "outputPath": "D:\\_programowanie\\devCenter\\DevCenter.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -153,14 +153,14 @@
         }
       }
     },
-    "C:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj": {
+    "D:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj",
+        "projectUniqueName": "D:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj",
         "projectName": "DevCenter.Infrastructure",
-        "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj",
+        "projectPath": "D:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\DevCenter.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\obj\\",
+        "outputPath": "D:\\_programowanie\\devCenter\\DevCenter.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -182,8 +182,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
-                "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj"
+              "D:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj": {
+                "projectPath": "D:\\_programowanie\\devCenter\\DevCenter.Domain\\DevCenter.Domain.csproj"
               }
             }
           }

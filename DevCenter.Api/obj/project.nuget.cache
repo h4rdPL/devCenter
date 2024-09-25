@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9hBWTskUiRDdqMd9ClkkmnMUrD2Qc6tRJX3kGUu5bWdsgbi4THbu5VUU0n0U1fvz91Pl/vLShC7AIyK9glrnTQ==",
+  "dgSpecHash": "cGE60x1AEKBMegOw4rgoqoWXe7/pIflxfD8AK7KqJQ8HqD8uHUZ24uBxmeCwJTWZbV/5EBYllo0xQ485iDs5BQ==",
   "success": true,
-  "projectFilePath": "C:\\_programowanie\\devCenter\\DevCenter.Api\\DevCenter.Api.csproj",
+  "projectFilePath": "D:\\_programowanie\\devCenter\\DevCenter.Api\\DevCenter.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\aspnet.security.oauth.validation\\2.0.0\\aspnet.security.oauth.validation.2.0.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\auth0.aspnetcore.authentication\\1.4.1\\auth0.aspnetcore.authentication.1.4.1.nupkg.sha512",

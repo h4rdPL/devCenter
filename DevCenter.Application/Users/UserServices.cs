@@ -10,12 +10,14 @@ namespace DevCenter.Application.Users
     public class UserServices : IUserServices
     {
         private readonly IUserRepository _userRepository;
+        private readonly IPasswordHasher _passwordHasher;
         private readonly ApplicationDbContext _context;
 
-        public UserServices(IUserRepository userRepository, ApplicationDbContext context)
+        public UserServices(IUserRepository userRepository, ApplicationDbContext context, IPasswordHasher passwordHasher)
         {
             _userRepository = userRepository;
             _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<Result<User>> RegisterUser(string username, string email, string password, UserRoles role)
@@ -28,12 +30,12 @@ namespace DevCenter.Application.Users
             var existingUser = await _userRepository.GetUserByEmail(email);
             if (existingUser != null) return Result<User>.Failure("A user with this email already exists.");
 
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            // var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             var user = new User
             {
                 Username = username,
                 Email = email,
-                Password = hashedPassword,
+                Password = _passwordHasher.Hash(password),
                 Role = role
             };
 

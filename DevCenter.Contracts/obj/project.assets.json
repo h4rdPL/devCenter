@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\_programowanie\\devCenter\\DevCenter.Contracts\\DevCenter.Contracts.csproj",
+      "projectUniqueName": "D:\\_programowanie\\devCenter\\DevCenter.Contracts\\DevCenter.Contracts.csproj",
       "projectName": "DevCenter.Contracts",
-      "projectPath": "C:\\_programowanie\\devCenter\\DevCenter.Contracts\\DevCenter.Contracts.csproj",
+      "projectPath": "D:\\_programowanie\\devCenter\\DevCenter.Contracts\\DevCenter.Contracts.csproj",
       "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-      "outputPath": "C:\\_programowanie\\devCenter\\DevCenter.Contracts\\obj\\",
+      "outputPath": "D:\\_programowanie\\devCenter\\DevCenter.Contracts\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -5,10 +5,11 @@ using DevCenter.Application.Users;
 using DevCenter.Domain.Entieties;
 using DevCenter.Domain.Enums.Users;
 using DevCenter.Domain.Users;
+using DevCenter.Infrastructure.Data;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Identity.Client;
 using Moq;
 
 namespace DevCenter.Tests.Controllers
@@ -19,23 +20,29 @@ namespace DevCenter.Tests.Controllers
         private readonly Mock<IConfiguration> _configurationMock;
         private readonly Mock<IUserClaimsService> _userClaimsServiceMock;
         private readonly UserController _controller;
-        private readonly Mock<UserServices> _userServicesMock;  
-
 
         public UserControllerTests()
         {
+            // Mock dependencies
             _userRepositoryMock = new Mock<IUserRepository>();
             _configurationMock = new Mock<IConfiguration>();
             _userClaimsServiceMock = new Mock<IUserClaimsService>();
 
+            var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase("TestDatabase")
+                .Options;
+            var dbContextMock = new ApplicationDbContext(dbContextOptions);
 
-            _userServicesMock = new Mock<UserServices>(  
+            var passwordHasherMock = new Mock<IPasswordHasher>();
+
+            var userServices = new UserServices(
                 _userRepositoryMock.Object,
-                null 
+                dbContextMock,
+                passwordHasherMock.Object
             );
 
             _controller = new UserController(
-                _userServicesMock.Object,  
+                userServices,
                 _configurationMock.Object,
                 _userClaimsServiceMock.Object
             );
@@ -44,13 +51,8 @@ namespace DevCenter.Tests.Controllers
         [Fact]
         public async Task AuthenticateGoogle_TokenMissing_ReturnsBadRequest()
         {
-            // Arrange
             var googleLoginDTO = new GoogleLoginDTO { Token = string.Empty };
-
-            // Act
             var result = await _controller.AuthenticateGoogle(googleLoginDTO);
-
-            // Assert
             var badRequestResult = result as BadRequestObjectResult;
             badRequestResult.Should().NotBeNull();
             badRequestResult.Value.Should().Be("Token is required.");
@@ -59,12 +61,8 @@ namespace DevCenter.Tests.Controllers
         [Fact]
         public async Task AuthenticateGoogle_TokenIsValid_ReturnsOk()
         {
-            // Arrange
             var mockToken = "mock-valid-google-token";
-            var googleLoginDTO = new GoogleLoginDTO
-            {
-                Token = mockToken
-            };
+            var googleLoginDTO = new GoogleLoginDTO { Token = mockToken };
 
             var mockAuthResult = Result<User>.Success(new User
             {
@@ -80,20 +78,16 @@ namespace DevCenter.Tests.Controllers
             var userClaimsServiceMock = new Mock<IUserClaimsService>();
 
             var controller = new UserController(userServicesMock.Object, configurationMock.Object, userClaimsServiceMock.Object);
-
-            // Act
             var result = await controller.AuthenticateGoogle(googleLoginDTO);
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
-            Assert.Equal(mockAuthResult.Value, okResult.Value); 
+            Assert.Equal(mockAuthResult.Value, okResult.Value);
         }
 
         [Fact]
         public async Task UserRegister_InvalidEmailFormat_ShouldReturnBadRequest()
         {
-            // Arrange
             var invalidEmail = "invalid-email-format";
             var userDTO = new UserDTO(
                 "TestUser",
@@ -112,20 +106,17 @@ namespace DevCenter.Tests.Controllers
             var userClaimsServiceMock = new Mock<IUserClaimsService>();
 
             var controller = new UserController(userServicesMock.Object, configurationMock.Object, userClaimsServiceMock.Object);
-
-            // Act
             var result = await controller.UserRegister(userDTO);
 
-            // Assert
             var actionResult = Assert.IsType<ActionResult<UserDTO>>(result);
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(actionResult.Result);
             Assert.Equal(400, badRequestResult.StatusCode);
             Assert.Equal("Invalid email format.", badRequestResult.Value);
         }
+
         [Fact]
         public async Task UserRegister_ValidEmailFormat_ShouldReturnUser()
         {
-            // Arrange
             var validEmail = "test@example.com";
             var userDTO = new UserDTO(
                 "TestUser",
@@ -151,14 +142,10 @@ namespace DevCenter.Tests.Controllers
             var userClaimsServiceMock = new Mock<IUserClaimsService>();
 
             var controller = new UserController(userServicesMock.Object, configurationMock.Object, userClaimsServiceMock.Object);
-
-            // Act
             var result = await controller.UserRegister(userDTO);
 
-            // Assert
             var actionResult = Assert.IsType<ActionResult<UserDTO>>(result);
             var createdResult = Assert.IsType<CreatedAtActionResult>(actionResult.Result);
-
 
             Assert.Equal(201, createdResult.StatusCode);
 

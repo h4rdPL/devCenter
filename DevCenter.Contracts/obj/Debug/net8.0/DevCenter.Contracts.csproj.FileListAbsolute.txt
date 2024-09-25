@@ -21,3 +21,15 @@ C:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contr
 C:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\refint\DevCenter.Contracts.dll
 C:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.pdb
 C:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\ref\DevCenter.Contracts.dll
+D:\_programowanie\devCenter\DevCenter.Contracts\bin\Debug\net8.0\DevCenter.Contracts.deps.json
+D:\_programowanie\devCenter\DevCenter.Contracts\bin\Debug\net8.0\DevCenter.Contracts.dll
+D:\_programowanie\devCenter\DevCenter.Contracts\bin\Debug\net8.0\DevCenter.Contracts.pdb
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.AssemblyInfoInputs.cache
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.AssemblyInfo.cs
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.csproj.CoreCompileInputs.cache
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.sourcelink.json
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.dll
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\refint\DevCenter.Contracts.dll
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\DevCenter.Contracts.pdb
+D:\_programowanie\devCenter\DevCenter.Contracts\obj\Debug\net8.0\ref\DevCenter.Contracts.dll
