@@ -1,8 +1,7 @@
-﻿namespace DevCenter.Application.Users
+﻿namespace DevCenter.Application.Users;
+
+public interface IPasswordHasher
 {
-    public interface IPasswordHasher
-    {
-        string Hash(string password);
-        bool Verify(string password, string passwordHash);
-    }
+    string Hash(string password);
+    bool Verify(string password, string passwordHash);
 }

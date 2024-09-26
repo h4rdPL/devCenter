@@ -8,8 +8,5 @@
             public string Value { get; set; } 
             public string ErrorMessage { get; set; }
         }
-
-
-
     }
 }

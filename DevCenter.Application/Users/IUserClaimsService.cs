@@ -1,9 +1,8 @@
 ﻿using System.Security.Claims;
 
-namespace DevCenter.Application.Users
+namespace DevCenter.Application.Users;
+
+public interface IUserClaimsService
 {
-    public interface IUserClaimsService
-    {
-        Task<string> GetUserEmailClaimAsync(ClaimsPrincipal user);
-    }
+    Task<string> GetUserEmailClaimAsync(ClaimsPrincipal user);
 }
