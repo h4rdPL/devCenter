@@ -1,6 +1,5 @@
 ﻿using DevCenter.Api.Dto;
 using DevCenter.Application.Users;
-using DevCenter.Domain.Entieties;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,60 +64,6 @@ public class UserController : ControllerBase
             {
                 return Unauthorized(result.ErrorMessage);
             }
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
-    }
-
-    [Authorize]
-    [HttpGet("counter")]
-    public async Task<IActionResult> GetCounter()
-    {
-        try
-        {
-            var emailClaim = await _userClaimsService.GetUserEmailClaimAsync(User);
-
-            if (string.IsNullOrEmpty(emailClaim))
-            {
-                return BadRequest("User email not found.");
-            }
-
-            var result = await _userServices.GetCounterByEmail(emailClaim);
-
-            return result.IsSuccess ? Ok(result.Value) : StatusCode(500, result.ErrorMessage);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
-    }
-
-    [Authorize]
-    [HttpPost("counter")]
-    public async Task<IActionResult> UpdateCounter([FromBody] int incrementValue)
-    {
-        try
-        {
-            var emailClaim = await _userClaimsService.GetUserEmailClaimAsync(User);
-
-            if (string.IsNullOrEmpty(emailClaim))
-            {
-                return Unauthorized("Email claim not found.");
-            }
-
-            var currentCounterResult = await _userServices.GetCounterByEmail(emailClaim);
-
-            if (!currentCounterResult.IsSuccess)
-            {
-                return StatusCode(500, currentCounterResult.ErrorMessage);
-            }
-
-            var newCounterValue = currentCounterResult.Value + incrementValue;
-            var updateResult = await _userServices.UpdateCounter(emailClaim, newCounterValue);
-
-            return updateResult.IsSuccess ? Ok() : StatusCode(500, updateResult.ErrorMessage);
         }
         catch (Exception ex)
         {

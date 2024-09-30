@@ -1,5 +1,6 @@
 ﻿using DevCenter.Application.Users;
 using DevCenter.Domain.Entieties;
+using DevCenter.Domain.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,44 +11,41 @@ namespace DevCenter.Api.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly IUserServices _userServices;
-        public CompanyController(IUserServices userServices)
+        private readonly IUserClaimsService _userClaimsService;
+        private readonly IUserRepository _userRepository;
+        public CompanyController(IUserServices userServices, IUserClaimsService userClaimsService, IUserRepository userRepository)
         {
             _userServices = userServices;
+            _userClaimsService = userClaimsService;
+            _userRepository = userRepository;
         }
 
         [Authorize]
-        [HttpPost("{userId}/company")]
-        public async Task<IActionResult> AddCompany(int userId, [FromBody] Company company)
+        [HttpPost("add")]
+        public async Task<IActionResult> AddCompany([FromBody] Company company)
         {
             if (company == null)
             {
                 return BadRequest("Company is null");
             }
 
-            if (string.IsNullOrWhiteSpace(company.NIP) ||
-                string.IsNullOrWhiteSpace(company.Name) ||
-                string.IsNullOrWhiteSpace(company.Country) ||
-                string.IsNullOrWhiteSpace(company.City) ||
-                string.IsNullOrWhiteSpace(company.PostalCode) ||
-                string.IsNullOrWhiteSpace(company.Street) ||
-                string.IsNullOrWhiteSpace(company.CompanyEmail))
-            {
-                return BadRequest("Company details cannot be empty.");
-            }
             if (company.NIP.Length != 10)
             {
                 return BadRequest("NIP must be a 10 digit number.");
             }
 
+            var emailClaim = await _userClaimsService.GetUserEmailClaimAsync(User);
+            var user = await _userRepository.GetUserByEmail(emailClaim);
 
-            var result = await _userServices.AddCompanyToUser(userId, company);
+            var result = await _userServices.AddCompanyToUser(user.Id, company);
 
             if (result.IsSuccess)
             {
-                return Ok();
+                return Ok("Company added successfully.");
             }
 
             return BadRequest(result.ErrorMessage);
         }
+
     }
 }

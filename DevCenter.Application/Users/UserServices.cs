@@ -59,7 +59,8 @@ public class UserServices : IUserServices
                     Username = payload.Name,
                     Role = UserRoles.admin,
                     Password = "TESTING_PASSWORD",
-                    Counter = 0
+                    Counter = 0,
+                    Company = null
                 };
                 await _userRepository.Add(user);
                 await _context.SaveChangesAsync();
@@ -71,14 +72,6 @@ public class UserServices : IUserServices
         {
             return Result<User>.Failure($"Error while authenticating Google user: {ex.Message}");
         }
-    }
-
-    public async Task<Result<int>> GetCounterByEmail(string email)
-    {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-        if (user == null) return Result<int>.Failure("User not found.");
-
-        return Result<int>.Success(user.Counter);
     }
 
     public async Task<Result> UpdateCounter(string email, int newCounterValue)

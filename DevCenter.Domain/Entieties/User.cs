@@ -10,6 +10,6 @@ public class User
     public string Password { get; set; }
     public UserRoles Role { get; set; }
     public int Counter { get; set; }
-    public Company Company { get; set; }
+    public Company? Company { get; set; }
 
 }
