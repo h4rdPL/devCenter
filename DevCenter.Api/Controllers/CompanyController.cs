@@ -29,10 +29,6 @@ namespace DevCenter.Api.Controllers
                 return BadRequest("Company is null");
             }
 
-            if (company.NIP.Length != 10)
-            {
-                return BadRequest("NIP must be a 10 digit number.");
-            }
 
             var emailClaim = await _userClaimsService.GetUserEmailClaimAsync(User);
             var user = await _userRepository.GetUserByEmail(emailClaim);

@@ -2,22 +2,29 @@
 using DevCenter.Application.Common;
 using DevCenter.Application.Users;
 using DevCenter.Domain.Entieties;
+using DevCenter.Domain.Enums.Users;
+using DevCenter.Domain.Users;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System.Security.Claims;
 
 namespace DevCenter.Tests.Controllers
 {
     public class CompanyControllerTests
     {
         private readonly Mock<IUserServices> _userServicesMock;
+        private readonly Mock<IUserClaimsService> _userClaimsServiceMock;
+        private readonly Mock<IUserRepository> _userRepositoryMock;
         private readonly CompanyController _controller;
 
         public CompanyControllerTests()
         {
             _userServicesMock = new Mock<IUserServices>();
+            _userClaimsServiceMock = new Mock<IUserClaimsService>();
+            _userRepositoryMock = new Mock<IUserRepository>();
 
-            _controller = new CompanyController(_userServicesMock.Object);
+            _controller = new CompanyController(_userServicesMock.Object, _userClaimsServiceMock.Object, _userRepositoryMock.Object);
         }
 
         [Fact]
@@ -35,18 +42,33 @@ namespace DevCenter.Tests.Controllers
             };
 
             var userId = 1;
+            var emailClaim = "test@example.com";
+
+            _userClaimsServiceMock.Setup(ucs => ucs.GetUserEmailClaimAsync(It.IsAny<ClaimsPrincipal>()))
+                                  .ReturnsAsync(emailClaim);
+
+            var user = new User
+            {
+                Id = userId,
+                Email = emailClaim,
+                Username = "TestUser",
+                Role = UserRoles.admin
+            };
+
+            _userRepositoryMock.Setup(ur => ur.GetUserByEmail(emailClaim))
+                               .ReturnsAsync(user);
 
             var mockResult = Result.Failure("Company details cannot be empty.");
-
             _userServicesMock.Setup(us => us.AddCompanyToUser(userId, company))
                              .ReturnsAsync(mockResult);
 
-            var result = await _controller.AddCompany(userId, company);
+            var result = await _controller.AddCompany(company);
 
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             badRequestResult.StatusCode.Should().Be(400);
             badRequestResult.Value.Should().Be("Company details cannot be empty.");
         }
+
 
         [Fact]
         public async Task AddCompany_ValidDetails_ShouldReturnSuccess()
@@ -62,16 +84,32 @@ namespace DevCenter.Tests.Controllers
                 CompanyEmail = "test@gmail.com"
             };
 
-            var userId = 1;
+            var userId = 1; 
+            var emailClaim = "test@gmail.com";
+
+            _userClaimsServiceMock.Setup(ucs => ucs.GetUserEmailClaimAsync(It.IsAny<ClaimsPrincipal>()))
+                                  .ReturnsAsync(emailClaim);
+
+            var user = new User
+            {
+                Id = userId,
+                Email = emailClaim,
+                Username = "TestUser",
+                Role = UserRoles.admin
+            };
+
+            _userRepositoryMock.Setup(ur => ur.GetUserByEmail(emailClaim))
+                               .ReturnsAsync(user);
+
             var mockResult = Result.Success();
-
             _userServicesMock.Setup(us => us.AddCompanyToUser(userId, company))
-                    .ReturnsAsync(mockResult);
+                             .ReturnsAsync(mockResult);
 
-            var result = await _controller.AddCompany(userId, company);
+            var result = await _controller.AddCompany(company);
 
-            var okResult = Assert.IsType<OkResult>(result);
+            var okResult = Assert.IsType<OkObjectResult>(result);
         }
+
 
         [Fact]
         public async Task AddCompany_InvalidNIP_ShouldReturnBadRequest()
@@ -87,15 +125,10 @@ namespace DevCenter.Tests.Controllers
                 CompanyEmail = "test@example.com"
             };
 
-            var userId = 1;
-
-            var result = await _controller.AddCompany(userId, company);
+            var result = await _controller.AddCompany(company);
 
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             badRequestResult.Value.Should().Be("NIP must be a 10 digit number.");
         }
-
-
-
     }
 }

@@ -51,6 +51,9 @@ public class UserServices : IUserServices
             if (payload == null) return Result<User>.Failure("Invalid Google token.");
 
             var user = await _userRepository.GetUserByEmail(payload.Email);
+
+            var randomPassword = Guid.NewGuid().ToString();
+
             if (user == null)
             {
                 user = new User
@@ -58,8 +61,7 @@ public class UserServices : IUserServices
                     Email = payload.Email,
                     Username = payload.Name,
                     Role = UserRoles.admin,
-                    Password = "TESTING_PASSWORD",
-                    Counter = 0,
+                    Password = _passwordHasher.Hash(randomPassword),
                     Company = null
                 };
                 await _userRepository.Add(user);
@@ -72,16 +74,6 @@ public class UserServices : IUserServices
         {
             return Result<User>.Failure($"Error while authenticating Google user: {ex.Message}");
         }
-    }
-
-    public async Task<Result> UpdateCounter(string email, int newCounterValue)
-    {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-        if (user == null) return Result.Failure("User not found.");
-
-        user.Counter = newCounterValue;
-        await _context.SaveChangesAsync();
-        return Result.Success();
     }
 
     private bool IsValidEmail(string email)
@@ -105,6 +97,12 @@ public class UserServices : IUserServices
         {
             return Result.Failure("Company details cannot be empty.");
         }
+
+        if (company.NIP.Length != 10)
+        {
+            return Result.Failure("NIP must be a 10 digit number.");
+        }
+
 
         if (!IsValidEmail(company.CompanyEmail))
         {
