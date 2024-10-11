@@ -4,7 +4,6 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import LoginIcon from "../../assets/images/loginIcon.svg";
-import Google from "../../assets/images/google.svg";
 const LoginWrapper = styled.section`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.white};
@@ -33,30 +32,6 @@ const Icon = styled.img`
 const Title = styled.h1`
   font-size: 24px;
   margin-bottom: 20px;
-`;
-
-const GoogleButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: transparent;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-
-  &:hover {
-    border: 1px solid ${({ theme }) => theme.lightBlue};
-    background-color: #357ae8;
-  }
-`;
-
-const GoogleIcon = styled.img`
-  width: 20px;
-  margin-right: 10px;
 `;
 
 const Text = styled.p`
@@ -138,16 +113,14 @@ const LoginButton = styled.button`
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-
   const handleSuccess = async (credentialResponse: any) => {
     try {
       const token = credentialResponse?.credential;
-      console.log(token);
+
       if (!token) {
         throw new Error("No token provided");
       }
 
-      // Save the token to localStorage
       localStorage.setItem("token", token);
 
       const decoded: any = jwtDecode(token);
@@ -165,11 +138,36 @@ const Login: React.FC = () => {
         }
       );
 
-      if (response.ok) {
-        const userData = await response.json();
-        navigate("/dashboard", { state: { userData: decoded, ...userData } });
+      if (!response.ok) {
+        throw new Error("Error sending token to backend");
+      }
+
+      const userData = await response.json();
+
+      const companyCheckResponse = await fetch(
+        `https://localhost:7234/api/Company/hasCompany`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!companyCheckResponse.ok) {
+        throw new Error("Error checking company status");
+      }
+
+      const { hasCompany, companyId } = await companyCheckResponse.json();
+      console.log(`Has Company: ${hasCompany}, Company ID: ${companyId}`);
+
+      if (hasCompany) {
+        navigate("/home", { state: { userData: decoded, ...userData } });
       } else {
-        console.error("Error sending token to backend");
+        navigate("/dashboard", {
+          state: { userData: decoded, ...userData },
+        });
       }
     } catch (error) {
       console.error("Error during login process:", error);
@@ -184,7 +182,6 @@ const Login: React.FC = () => {
       <LoginForm>
         <Icon src={LoginIcon} alt="loginIcon" />
         <Title>Login to your Account</Title>
-        {/* <GoogleIcon src={Google} alt="Google icon" /> */}
         <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
         <Text>Or Sign in with Email address</Text>
         <Label htmlFor="email">Email</Label>

@@ -43,5 +43,34 @@ namespace DevCenter.Api.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
+        [Authorize]
+        [HttpGet("hasCompany")]
+        public async Task<IActionResult> HasCompany()
+        {
+            try
+            {
+                var userEmail = await _userClaimsService.GetUserEmailClaimAsync(User);
+
+                var user = await _userRepository.GetUserByEmail(userEmail);
+
+                var userCompany = await _userServices.GetUserCompany(user);
+
+                if (userCompany == null)
+                {
+                    return Ok(new { hasCompany = false, message = "User has no associated company" });
+                }
+
+                Console.WriteLine(user.Username);
+                Console.WriteLine(userCompany.Name);
+
+                return Ok(new { hasCompany = true, companyId = userCompany.Id });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
+
+
     }
 }

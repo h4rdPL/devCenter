@@ -13,7 +13,7 @@ const DashboardWrapper = styled.section`
   align-items: center;
   justify-content: center;
   padding: 20px;
-  position: relative; /* Ensure the DashboardWrapper is positioned */
+  position: relative;
 `;
 
 const DashboardContent = styled.div`

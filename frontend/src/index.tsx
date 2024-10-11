@@ -10,6 +10,7 @@ import { theme } from "./styles/theme/theme";
 import Login from "./pages/login/login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Dashboard from "./pages/dashboard/dashboard";
+import { Home } from "./pages/home/home";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -30,6 +31,10 @@ if (clientId) {
     {
       path: "/dashboard",
       element: <Dashboard />,
+    },
+    {
+      path: "/home",
+      element: <Home />,
     },
   ]);
 

@@ -4,7 +4,6 @@ using DevCenter.Domain.Enums.Users;
 using DevCenter.Domain.Users;
 using DevCenter.Infrastructure.Data;
 using Google.Apis.Auth;
-using Microsoft.EntityFrameworkCore;
 
 namespace DevCenter.Application.Users;
 
@@ -132,5 +131,12 @@ public class UserServices : IUserServices
 
         return Result.Success();
     }
+
+    public async Task<Company?> GetUserCompany(User user)
+    {
+        var company = await _userRepository.GetCompanyByUser(user);
+        return company;
+    }
+
 
 }

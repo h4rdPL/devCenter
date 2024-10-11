@@ -31,6 +31,17 @@ public class UserRepository : IUserRepository
         return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
     }
 
+    public async Task<Company?> GetCompanyByUser(User user)
+    {
+        // Assuming _context is your DbContext for accessing Users and Companies
+        return await _context.Users
+            .Where(u => u.Id == user.Id) // Find the user by their Id
+            .Select(u => u.Company)      // Select the associated company
+            .FirstOrDefaultAsync();      // Return the company or null
+    }
+
+
+
     /// <summary>
     /// Retrieves a <see cref="User"/> entity from the database based on the provided email address.
     /// </summary>

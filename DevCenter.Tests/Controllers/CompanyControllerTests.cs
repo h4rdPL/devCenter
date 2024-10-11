@@ -92,7 +92,7 @@ namespace DevCenter.Tests.Controllers
 
             var user = new User
             {
-                Id = userId,
+                Id = 1,
                 Email = emailClaim,
                 Username = "TestUser",
                 Role = UserRoles.admin
@@ -129,6 +129,37 @@ namespace DevCenter.Tests.Controllers
 
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             badRequestResult.Value.Should().Be("NIP must be a 10 digit number.");
+        }
+
+        [Fact]
+        public async Task HasCompany_ShouldReturnTrue_WhenUserHasCompany()
+        {
+            var userId = 1;
+
+            _userServicesMock.Setup(s => s.UserHasCompany(userId))
+                             .ReturnsAsync(true);
+
+            var result = await _controller.HasCompany() as OkObjectResult;
+
+            Assert.NotNull(result);
+            Assert.Equal(200, result.StatusCode);
+            Assert.True((bool)result.Value);
+
+        }
+
+        [Fact]
+        public async Task HasCompany_ShouldReturnFalse_WhenUserDoesNotHaveCompany()
+        {
+            var userId = 1;
+
+            _userServicesMock.Setup(s => s.UserHasCompany(userId)).ReturnsAsync(false);
+
+            var result = await _controller.HasCompany() as OkObjectResult;
+
+            Assert.NotNull(result);
+            Assert.Equal(200, result.StatusCode);
+            Assert.False((bool)result.Value);   
+
         }
     }
 }
