@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 import LoginIcon from "../../assets/images/loginIcon.svg";
+
 const LoginWrapper = styled.section`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.white};
@@ -34,18 +35,6 @@ const Title = styled.h1`
   margin-bottom: 20px;
 `;
 
-const Text = styled.p`
-  font-size: 14px;
-  margin-bottom: 10px;
-`;
-
-const Label = styled.label`
-  font-size: 14px;
-  color: ${({ theme }) => theme.white};
-  align-self: flex-start;
-  margin-bottom: 5px;
-`;
-
 const Input = styled.input`
   width: 100%;
   padding: 10px;
@@ -58,42 +47,6 @@ const Input = styled.input`
     border-color: #4285f4;
     outline: none;
   }
-`;
-
-const Options = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const RememberMe = styled.span`
-  display: flex;
-  gap: 0.25rem;
-  font-size: 14px;
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const ForgotPassword = styled.span`
-  font-size: 14px;
-  color: ${({ theme }) => theme.warning};
-  font-weight: 700;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const RegisterPrompt = styled.p`
-  font-size: 14px;
-  color: ${({ theme }) => theme.white};
-  font-weight: bold;
-  margin-bottom: 20px;
-  align-self: flex-start;
 `;
 
 const LoginButton = styled.button`
@@ -113,6 +66,11 @@ const LoginButton = styled.button`
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleSuccess = async (credentialResponse: any) => {
     try {
       const token = credentialResponse?.credential;
@@ -121,10 +79,6 @@ const Login: React.FC = () => {
         throw new Error("No token provided");
       }
 
-      localStorage.setItem("token", token);
-
-      const decoded: any = jwtDecode(token);
-
       const response = await fetch(
         "https://localhost:7234/api/User/auth/google",
         {
@@ -132,9 +86,7 @@ const Login: React.FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            Token: token,
-          }),
+          body: JSON.stringify({ Token: token }),
         }
       );
 
@@ -143,9 +95,10 @@ const Login: React.FC = () => {
       }
 
       const userData = await response.json();
+      console.log("User Data from Backend:", userData);
 
       const companyCheckResponse = await fetch(
-        `https://localhost:7234/api/Company/hasCompany`,
+        "https://localhost:7234/api/Company/hasCompany",
         {
           method: "GET",
           headers: {
@@ -159,44 +112,80 @@ const Login: React.FC = () => {
         throw new Error("Error checking company status");
       }
 
-      const { hasCompany, companyId } = await companyCheckResponse.json();
-      console.log(`Has Company: ${hasCompany}, Company ID: ${companyId}`);
+      const { hasCompany } = await companyCheckResponse.json();
+      console.log(`Has Company: ${hasCompany}`);
 
+      login(token, userData);
       if (hasCompany) {
-        navigate("/home", { state: { userData: decoded, ...userData } });
+        navigate("/home");
       } else {
-        navigate("/dashboard", {
-          state: { userData: decoded, ...userData },
-        });
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Error during login process:", error);
     }
   };
 
-  const handleError = () => {
-    console.log("Login Failed");
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // You can add your username/password login logic here
+    try {
+      const response = await fetch(
+        "https://localhost:7234/api/User/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Login failed. Please check your credentials.");
+      }
+
+      const userData = await response.json();
+      console.log("User Data from Backend:", userData);
+
+      const token = userData.token;
+      login(token, userData);
+
+      navigate("/home");
+    } catch (error) {
+      console.error("Error during login process:", error);
+    } finally {
+      setUsername("");
+      setPassword("");
+    }
   };
+
   return (
     <LoginWrapper>
-      <LoginForm>
+      <LoginForm onSubmit={handleSubmit}>
         <Icon src={LoginIcon} alt="loginIcon" />
         <Title>Login to your Account</Title>
-        <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
-        <Text>Or Sign in with Email address</Text>
-        <Label htmlFor="email">Email</Label>
-        <Input type="text" placeholder="Email" />
-        <Label htmlFor="password">Password</Label>
-        <Input type="text" placeholder="Password" />
-        <Options>
-          <RememberMe>
-            <input type="checkbox" />
-            Remember me?
-          </RememberMe>
-          <ForgotPassword>Forgot password</ForgotPassword>
-        </Options>
-        <RegisterPrompt>Don't have an account? Register now!</RegisterPrompt>
-        <LoginButton>Login</LoginButton>
+        <GoogleLogin
+          onSuccess={handleSuccess}
+          onError={() => console.log("Login Failed")}
+        />
+        <br />
+        <Input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <Input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <LoginButton type="submit">Login</LoginButton>
       </LoginForm>
     </LoginWrapper>
   );

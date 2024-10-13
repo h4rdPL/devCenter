@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
+import { useAuth } from "../../context/authContext";
 
 const DashboardWrapper = styled.section`
   background-color: ${({ theme }) => theme.background};
@@ -25,7 +26,7 @@ const DashboardContent = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   position: relative;
-  z-index: 1; /* Ensure content appears above confetti */
+  z-index: 1;
 `;
 
 const Title = styled.h1`
@@ -139,6 +140,8 @@ const SuccessMessage = styled.p`
 `;
 
 const Dashboard = () => {
+  const { user } = useAuth();
+
   const [company, setCompany] = useState({
     name: "",
     nip: "",
@@ -153,12 +156,11 @@ const Dashboard = () => {
   const [success, setSuccess] = useState<string | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const token = localStorage.getItem("token");
-
-  const location = useLocation();
+  console.log(user);
   const navigate = useNavigate();
-  const userData = location.state?.userData;
-  console.log(userData);
 
+  const imageUrl = user?.picture || "https://via.placeholder.com/100";
+  const userEmail = user?.email || "User";
   const { width, height } = useWindowSize();
 
   const handleLogout = () => {
@@ -168,7 +170,16 @@ const Dashboard = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setCompany({ ...company, [name]: value });
+    setCompany((prevCompany) => ({
+      ...prevCompany,
+      [name]: value,
+    }));
+
+    if (name === "nip" && (value.length !== 10 || !/^\d{10}$/.test(value))) {
+      setError("NIP must be exactly 10 digits.");
+    } else {
+      setError(null);
+    }
   };
 
   const handleSubmitCompany = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -176,8 +187,14 @@ const Dashboard = () => {
     setError(null);
     setSuccess(null);
 
-    if (company.nip.length !== 10 || !/^\d{10}$/.test(company.nip)) {
-      setError("NIP must be exactly 10 digits.");
+    if (
+      !company.name ||
+      !company.country ||
+      !company.city ||
+      !company.postalCode ||
+      !company.street
+    ) {
+      setError("All fields are required.");
       return;
     }
 
@@ -190,35 +207,33 @@ const Dashboard = () => {
         },
         body: JSON.stringify({
           ...company,
-          companyEmail: userData.email,
+          companyEmail: userEmail,
         }),
       });
 
-      if (response.ok) {
-        console.log("Company added successfully.");
-        setSuccess("Company added successfully.");
-        setCompany({
-          name: "",
-          nip: "",
-          country: "",
-          city: "",
-          postalCode: "",
-          street: "",
-          email: userData.email,
-        });
-        setCurrentStep(1);
-        setShowConfetti(true);
-        setTimeout(() => {
-          setShowConfetti(false);
-        }, 5000);
-      } else {
+      if (!response.ok) {
         const errorData = await response.json();
-        console.error("Failed to add company:", errorData);
-        setError(errorData.message || "Failed to add company.");
+        throw new Error(errorData.message || "Failed to add company.");
       }
-    } catch (error) {
+
+      setSuccess("Company added successfully.");
+      setCompany({
+        name: "",
+        nip: "",
+        country: "",
+        city: "",
+        postalCode: "",
+        street: "",
+        email: userEmail,
+      });
+      setCurrentStep(1);
+      setShowConfetti(true);
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 5000);
+    } catch (error: any) {
       console.error("Error:", error);
-      setError("An unexpected error occurred.");
+      setError(error.message || "An unexpected error occurred.");
     }
   };
 
@@ -234,28 +249,25 @@ const Dashboard = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
-  const imageUrl = userData.picture || "https://via.placeholder.com/100";
-
   return (
     <DashboardWrapper>
-      {/* Confetti Animation in Fullscreen */}
       {showConfetti && <Confetti width={width} height={height} />}
 
       <DashboardContent>
         <Title>
-          Welcome, <br /> {userData.email}
+          Welcome, <br /> {userEmail}
         </Title>
         <Image
           src={imageUrl}
-          alt={userData.name}
+          alt={user?.username || "User"}
           onError={(e) => {
             e.currentTarget.src = "https://via.placeholder.com/100";
           }}
         />
 
         <StepIndicator>
-          <Step active={currentStep === 2}>1</Step>
-          <Step active={currentStep === 1}>2</Step>
+          <Step active={currentStep === 1}>1</Step>
+          <Step active={currentStep === 2}>2</Step>
         </StepIndicator>
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -265,7 +277,9 @@ const Dashboard = () => {
           <>
             <FormTitle>Step 1: Company Details</FormTitle>
             <Form onSubmit={(e) => e.preventDefault()}>
+              <label htmlFor="name">Company Name</label>
               <FormInput
+                id="name"
                 type="text"
                 name="name"
                 placeholder="Company Name"
@@ -273,7 +287,9 @@ const Dashboard = () => {
                 onChange={handleInputChange}
                 required
               />
+              <label htmlFor="nip">NIP (10 digits)</label>
               <FormInput
+                id="nip"
                 type="text"
                 name="nip"
                 placeholder="NIP (10 digits)"
@@ -283,7 +299,9 @@ const Dashboard = () => {
                 pattern="\d{10}"
                 title="NIP must be exactly 10 digits."
               />
+              <label htmlFor="country">Country</label>
               <FormInput
+                id="country"
                 type="text"
                 name="country"
                 placeholder="Country"
@@ -302,7 +320,9 @@ const Dashboard = () => {
           <>
             <FormTitle>Step 2: Address Details</FormTitle>
             <Form onSubmit={handleSubmitCompany}>
+              <label htmlFor="city">City</label>
               <FormInput
+                id="city"
                 type="text"
                 name="city"
                 placeholder="City"
@@ -310,7 +330,9 @@ const Dashboard = () => {
                 onChange={handleInputChange}
                 required
               />
+              <label htmlFor="postalCode">Postal Code</label>
               <FormInput
+                id="postalCode"
                 type="text"
                 name="postalCode"
                 placeholder="Postal Code"
@@ -318,7 +340,9 @@ const Dashboard = () => {
                 onChange={handleInputChange}
                 required
               />
+              <label htmlFor="street">Street</label>
               <FormInput
+                id="street"
                 type="text"
                 name="street"
                 placeholder="Street"
@@ -326,18 +350,10 @@ const Dashboard = () => {
                 onChange={handleInputChange}
                 required
               />
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Button
-                  type="button"
-                  onClick={prevStep}
-                  style={{ width: "48%" }}
-                >
-                  Back
-                </Button>
-                <Button type="submit" style={{ width: "48%" }}>
-                  Submit
-                </Button>
-              </div>
+              <Button type="submit">Submit</Button>
+              <Button type="button" onClick={prevStep}>
+                Back
+              </Button>
             </Form>
           </>
         )}

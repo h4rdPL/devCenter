@@ -50,7 +50,6 @@ public class UserServices : IUserServices
             if (payload == null) return Result<User>.Failure("Invalid Google token.");
 
             var user = await _userRepository.GetUserByEmail(payload.Email);
-
             var randomPassword = Guid.NewGuid().ToString();
 
             if (user == null)
@@ -61,11 +60,15 @@ public class UserServices : IUserServices
                     Username = payload.Name,
                     Role = UserRoles.admin,
                     Password = _passwordHasher.Hash(randomPassword),
-                    Company = null
+                    Company = null 
                 };
                 await _userRepository.Add(user);
                 await _context.SaveChangesAsync();
             }
+
+            var userCompany = await _userRepository.GetCompanyByUser(user);
+
+            user.Company = userCompany;
 
             return Result<User>.Success(user);
         }
@@ -74,6 +77,7 @@ public class UserServices : IUserServices
             return Result<User>.Failure($"Error while authenticating Google user: {ex.Message}");
         }
     }
+
 
     private bool IsValidEmail(string email)
     {
@@ -137,6 +141,5 @@ public class UserServices : IUserServices
         var company = await _userRepository.GetCompanyByUser(user);
         return company;
     }
-
 
 }

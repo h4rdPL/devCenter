@@ -8,9 +8,11 @@ import Homepage from "./pages/homepage/homepage";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme/theme";
 import Login from "./pages/login/login";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import Dashboard from "./pages/dashboard/dashboard";
-import { Home } from "./pages/home/home";
+import Home from "./pages/home/home";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { AuthProvider } from "./context/authContext";
+import ProtectedRoute from "./pages/protectedRoutes/protectedRoutes";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -34,7 +36,11 @@ if (clientId) {
     },
     {
       path: "/home",
-      element: <Home />,
+      element: (
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      ),
     },
   ]);
 
@@ -42,8 +48,10 @@ if (clientId) {
     <GoogleOAuthProvider clientId={clientId}>
       <React.StrictMode>
         <ThemeProvider theme={theme}>
-          <RouterProvider router={router} />
-          <App />
+          <AuthProvider>
+            <RouterProvider router={router}></RouterProvider>
+            <App />
+          </AuthProvider>
         </ThemeProvider>
       </React.StrictMode>
     </GoogleOAuthProvider>
