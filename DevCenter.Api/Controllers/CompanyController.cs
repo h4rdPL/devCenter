@@ -20,6 +20,11 @@ namespace DevCenter.Api.Controllers
             _userRepository = userRepository;
         }
 
+        /// <summary>
+        /// Create company
+        /// </summary>
+        /// <param name="company">company entity from the form</param>
+        /// <returns>Success if company is created</returns>
         [Authorize]
         [HttpPost("add")]
         public async Task<IActionResult> AddCompany([FromBody] Company company)
@@ -43,6 +48,10 @@ namespace DevCenter.Api.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
+        /// <summary>
+        /// Check if user has a company created
+        /// </summary>
+        /// <returns>true if user has a company</returns>
         [Authorize]
         [HttpGet("hasCompany")]
         public async Task<IActionResult> HasCompany()

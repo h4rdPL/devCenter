@@ -1,4 +1,5 @@
-﻿using DevCenter.Domain.Enums.Users;
+﻿using DevCenter.Domain.Entieties;
+using DevCenter.Domain.Enums.Users;
 
 namespace DevCenter.Api.Dto
 {
@@ -8,4 +9,7 @@ namespace DevCenter.Api.Dto
             string Password,
             UserRoles Role
         );
+
+
+
 }

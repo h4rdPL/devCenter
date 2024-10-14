@@ -14,7 +14,12 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-
+    /// <summary>
+    /// Add User to the database
+    /// </summary>
+    /// <param name="user">User entity</param>
+    /// <returns>-</returns>
+    /// <exception cref="ArgumentNullException">If User is null return exception</exception>
     public async Task Add(User user)
     {
         if (user == null)
@@ -26,18 +31,27 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Getting user by the id
+    /// </summary>
+    /// <param name="userId">user id </param>
+    /// <returns>User entity</returns>
     public async Task<User> GetById(int userId)
     {
         return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
     }
 
+    /// <summary>
+    /// Getting user and company using linq expressions
+    /// </summary>
+    /// <param name="user">User entity</param>
+    /// <returns>User and company entity</returns>
     public async Task<Company?> GetCompanyByUser(User user)
     {
-        // Assuming _context is your DbContext for accessing Users and Companies
         return await _context.Users
-            .Where(u => u.Id == user.Id) // Find the user by their Id
-            .Select(u => u.Company)      // Select the associated company
-            .FirstOrDefaultAsync();      // Return the company or null
+            .Where(u => u.Id == user.Id) 
+            .Select(u => u.Company)      
+            .FirstOrDefaultAsync();      
     }
 
 
@@ -65,6 +79,11 @@ public class UserRepository : IUserRepository
                              .FirstOrDefaultAsync(u => u.Email == email);
     }
 
+    /// <summary>
+    /// Update user data
+    /// </summary>
+    /// <param name="user">User entity</param>
+    /// <returns>It returns updated user data</returns>
     public async Task Update(User user)
     {
         _context.Users.Update(user);

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cGE60x1AEKBMegOw4rgoqoWXe7/pIflxfD8AK7KqJQ8HqD8uHUZ24uBxmeCwJTWZbV/5EBYllo0xQ485iDs5BQ==",
+  "dgSpecHash": "dYC7wUl1uWBDz44WnXceQJ6qY9F8moCiLIjU2w7FK8sLBnatBGUsJjjLOw0HenMwhymx2VL9YYGvbRlgDG5W/A==",
   "success": true,
   "projectFilePath": "D:\\_programowanie\\devCenter\\DevCenter.Api\\DevCenter.Api.csproj",
   "expectedPackageFiles": [
@@ -103,6 +103,7 @@
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.sqlserver.assessment.authoring\\1.1.0\\microsoft.sqlserver.assessment.authoring.1.1.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.sqlserver.sqlmanagementobjects\\171.30.0\\microsoft.sqlserver.sqlmanagementobjects.171.30.0.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",

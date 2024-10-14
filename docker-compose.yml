@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  devcenter.api:
+    image: ${DOCKER_REGISTRY-}devcenterapi
+    build:
+      context: .
+      dockerfile: DevCenter.Api/Dockerfile

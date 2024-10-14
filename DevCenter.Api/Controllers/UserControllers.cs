@@ -1,6 +1,5 @@
 ﻿using DevCenter.Api.Dto;
 using DevCenter.Application.Users;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevCenter.Api.Controllers;
@@ -20,6 +19,11 @@ public class UserController : ControllerBase
     }
 
 
+    /// <summary>
+    /// Register user using basic form
+    /// </summary>
+    /// <param name="user">user entity</param>
+    /// <returns>success messages if created successfully</returns>
     [HttpPost("register")]
     public async Task<ActionResult<UserDTO>> UserRegister([FromBody] UserDTO user)
     {
@@ -42,6 +46,11 @@ public class UserController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// authenticate the user using google authentitacator (google oAuth)
+    /// </summary>
+    /// <param name="googleLoginDTO">token</param>
+    /// <returns>User data based on the authentication</returns>
     [HttpPost("auth/google")]
     public async Task<IActionResult> AuthenticateGoogle([FromBody] GoogleLoginDTO googleLoginDTO)
     {

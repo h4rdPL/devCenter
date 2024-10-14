@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HDglqfm6qhVPSHOIIfBb5newC22HtjyZO+vTeCpmps7SnoBeY9w4f2c7wmLJJCku/CVtZms758hlOPVT04p9PQ==",
+  "dgSpecHash": "r1Vu2MwTcCX+m2fNhFWOegoWB/Ajh+cfee5cUDhmpmwf9/YT/jcKGVPMiD/CaOUmlBhlsQSUksnGZQLLb8jKMg==",
   "success": true,
   "projectFilePath": "D:\\_programowanie\\devCenter\\DevCenter.Tests\\DevCenter.Tests.csproj",
   "expectedPackageFiles": [
@@ -103,6 +103,7 @@
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.sqlserver.sqlmanagementobjects\\171.30.0\\microsoft.sqlserver.sqlmanagementobjects.171.30.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.8.0\\microsoft.testplatform.objectmodel.17.8.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.testplatform.testhost\\17.8.0\\microsoft.testplatform.testhost.17.8.0.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
