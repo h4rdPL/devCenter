@@ -79,16 +79,13 @@ const Login: React.FC = () => {
         throw new Error("No token provided");
       }
 
-      const response = await fetch(
-        "https://localhost:7234/api/User/auth/google",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ Token: token }),
-        }
-      );
+      const response = await fetch("/api/User/auth/google", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ Token: token }),
+      });
 
       if (!response.ok) {
         throw new Error("Error sending token to backend");
@@ -97,16 +94,13 @@ const Login: React.FC = () => {
       const userData = await response.json();
       console.log("User Data from Backend:", userData);
 
-      const companyCheckResponse = await fetch(
-        "https://localhost:7234/api/Company/hasCompany",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const companyCheckResponse = await fetch("/api/Company/hasCompany", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!companyCheckResponse.ok) {
         throw new Error("Error checking company status");
@@ -130,16 +124,13 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://localhost:7234/api/User/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        }
-      );
+      const response = await fetch("/api/User/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
       if (!response.ok) {
         throw new Error("Login failed. Please check your credentials.");

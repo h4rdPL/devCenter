@@ -199,7 +199,7 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await fetch(`https://localhost:7234/api/Company/add`, {
+      const response = await fetch(`/api/Company/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
