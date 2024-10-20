@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../components/modules/sidebar/sidebar";
+import Sidebar from "src/components/modules/sidebar/sidebar";
 import styled from "styled-components";
 
 interface LayoutProps {

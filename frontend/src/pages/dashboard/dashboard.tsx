@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "src/context/authContext";
 
 const DashboardWrapper = styled.section`
   background-color: ${({ theme }) => theme.background};

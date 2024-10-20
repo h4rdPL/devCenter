@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "src/context/authContext";
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   children,

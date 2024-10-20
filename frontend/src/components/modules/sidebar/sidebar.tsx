@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import dashboard from "../../../assets/icons/dashboard.svg";
-import calendar from "../../../assets/icons/calendar.svg";
-import contracts from "../../../assets/icons/contracts.svg";
-import archive from "../../../assets/icons/archive.svg";
-import stats from "../../../assets/icons/stats.svg";
-import logout from "../../../assets/icons/logout.svg";
-import sidebar from "../../../assets/icons/sidebar.svg";
-import logo from "../../../assets/images/logo.svg";
+import dashboard from "src/assets/icons/dashboard.svg";
+import calendar from "src/assets/icons/calendar.svg";
+import contracts from "src/assets/icons/contracts.svg";
+import archive from "src/assets/icons/stats.svg";
+import logout from "src/assets/icons/logout.svg";
+import sidebar from "src/assets/icons/sidebar.svg";
+import logo from "src/assets/images/logo.svg";
 
 interface NavigationProps {
   isMobile: boolean;
@@ -27,7 +26,7 @@ const Background = styled.section`
 `;
 
 const Navigation = styled.nav<NavigationProps>`
-  width: ${({ isSidebarVisible }) => (isSidebarVisible ? "200px" : "60px")};
+  width: ${({ isSidebarVisible }) => (isSidebarVisible ? "300px" : "60px")};
   transition: width 0.3s ease;
   background-color: ${({ theme }) => theme.navBackground};
   display: flex;
@@ -97,7 +96,7 @@ const StyledNavLink = styled(NavLink)<{
 const SidebarIcon = styled.img<{ isSidebarVisible: boolean }>`
   cursor: pointer;
   display: flex;
-  justify-content: center;
+  align-self: flex-end;
   width: 24px;
 `;
 
@@ -108,8 +107,8 @@ const Logo = styled.img<{ isSidebarVisible?: boolean }>`
   display: ${({ isSidebarVisible }) => (isSidebarVisible ? "block" : "none")};
 `;
 
-const Sidebar: React.FC<SidebarProps> = ({ isMobile, isSidebarVisible }) => {
-  const [sidebarVisible, setSidebarVisible] = useState(true); // Sidebar visible by default
+const Sidebar: React.FC<SidebarProps> = ({ isMobile }) => {
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   const toggleSidebar = () => {
     setSidebarVisible((prevState: boolean) => !prevState);
@@ -154,7 +153,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile, isSidebarVisible }) => {
               isSidebarVisible={sidebarVisible}
               className={({ isActive }) => (isActive ? "active" : "")}
             >
-              <ListItemIcons src={stats} alt="stats" />
+              <ListItemIcons src={"stats"} alt="stats" />
               <span>Zgłoszenia</span>
             </StyledNavLink>
           </ListItem>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Logo from "../../assets/images/logo.svg";
-import Youtube from "../../assets/images/youtube.svg";
-import X from "../../assets/images/x.svg";
-import Instagram from "../../assets/images/instagram.svg";
+import Logo from "src/assets/images/logo.svg";
+import Youtube from "src/assets/images/youtube.svg";
+import X from "src/assets/images/x.svg";
+import Instagram from "src/assets/images/instagram.svg";
 
 const HomepageWrapper = styled.section`
   display: flex;

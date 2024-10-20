@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
-import LoginIcon from "../../assets/images/loginIcon.svg";
+import { useAuth } from "src/context/authContext";
+import LoginIcon from "src/assets/images/loginIcon.svg";
 
 const LoginWrapper = styled.section`
   background-color: ${({ theme }) => theme.background};
