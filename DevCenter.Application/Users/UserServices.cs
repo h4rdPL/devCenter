@@ -188,4 +188,8 @@ public class UserServices : IUserServices
         return company;
     }
 
+    public Task<Result<TokenResponseDTO>> RefreshToken(string refreshToken)
+    {
+        throw new NotImplementedException();
+    }
 }

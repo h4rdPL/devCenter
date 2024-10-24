@@ -1,5 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-namespace DevCenter.Application.Common
+﻿namespace DevCenter.Application.Common
 {
     public class Result
     {

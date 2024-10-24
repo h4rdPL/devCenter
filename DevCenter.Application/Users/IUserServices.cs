@@ -10,4 +10,6 @@ public interface IUserServices
     Task<Result<UserResponseDTO>> AuthenticateGoogleUser(string token);
     Task<Result> AddCompanyToUser(int userId, Company company);
     Task<Company?> GetUserCompany(User user);
+    Task<Result<TokenResponseDTO>> RefreshToken(string refreshToken);
+
 }

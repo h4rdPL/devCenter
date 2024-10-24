@@ -8,6 +8,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace DevCenter.Tests.Controllers
 {
@@ -147,19 +148,34 @@ namespace DevCenter.Tests.Controllers
 
         }
 
+
         [Fact]
         public async Task HasCompany_ShouldReturnFalse_WhenUserDoesNotHaveCompany()
         {
             var userId = 1;
 
-            _userServicesMock.Setup(s => s.UserHasCompany(userId)).ReturnsAsync(false);
-
-            var result = await _controller.HasCompany() as OkObjectResult;
-
-            Assert.NotNull(result);
-            Assert.Equal(200, result.StatusCode);
-            Assert.False((bool)result.Value);   
-
+            _c
         }
+
+
+
+
+
+
+
+        //[Fact]
+        //public async Task HasCompany_ShouldReturnFalse_WhenUserDoesNotHaveCompany()
+        //{
+        //    var userId = 1;
+
+        //    _userServicesMock.Setup(s => s.UserHasCompany(userId)).ReturnsAsync(false);
+
+        //    var result = await _controller.HasCompany() as OkObjectResult;
+
+        //    Assert.NotNull(result);
+        //    Assert.Equal(200, result.StatusCode);
+        //    Assert.False((bool)result.Value);   
+
+        //}
     }
 }

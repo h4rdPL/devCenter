@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "src/context/authContext";
 import LoginIcon from "src/assets/images/loginIcon.svg";
 
+// Styled Components
 const LoginWrapper = styled.section`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.white};
@@ -113,7 +114,7 @@ const Login: React.FC = () => {
       if (hasCompany) {
         navigate("/home");
       } else {
-        navigate("/dashboard");
+        navigate("/dasboard");
       }
     } catch (error) {
       console.error("Error during login process:", error);

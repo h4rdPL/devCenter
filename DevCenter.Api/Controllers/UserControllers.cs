@@ -80,6 +80,27 @@ public class UserController : ControllerBase
         }
     }
 
- 
+    [HttpPost("auth/refresh-token")]
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDTO refreshTokenDto)
+    {
+        try
+        {
+            var result = await _userServices.RefreshToken(refreshTokenDto.RefreshToken);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            else
+            {
+                return Unauthorized(result.ErrorMessage);
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
 
 }
+

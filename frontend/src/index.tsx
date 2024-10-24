@@ -33,16 +33,6 @@ if (clientId) {
       element: <Login />,
     },
     {
-      path: "/dashboard",
-      element: (
-        <ProtectedRoute>
-          <Layout>
-            <Home />
-          </Layout>
-        </ProtectedRoute>
-      ),
-    },
-    {
       path: "/home",
       element: (
         <ProtectedRoute>
@@ -52,6 +42,7 @@ if (clientId) {
         </ProtectedRoute>
       ),
     },
+
     {
       path: "/contractors",
       element: (
