@@ -10,11 +10,6 @@ import logout from "src/assets/icons/logout.svg";
 import sidebar from "src/assets/icons/sidebar.svg";
 import logo from "src/assets/images/logo.svg";
 
-interface NavigationProps {
-  isMobile: boolean;
-  isSidebarVisible: boolean;
-}
-
 interface SidebarProps {
   isMobile: boolean;
   isSidebarVisible: boolean;
@@ -27,7 +22,7 @@ const Background = styled.section`
   display: flex;
 `;
 
-const Navigation = styled.nav<NavigationProps>`
+const Navigation = styled.nav<{ isSidebarVisible: boolean }>`
   width: ${({ isSidebarVisible }) => (isSidebarVisible ? "300px" : "60px")};
   transition: width 0.3s ease;
   background-color: ${({ theme }) => theme.navBackground};
@@ -36,6 +31,7 @@ const Navigation = styled.nav<NavigationProps>`
   padding: 10px;
   align-items: ${({ isSidebarVisible }) =>
     isSidebarVisible ? "flex-start" : "center"};
+  overflow: hidden;
 `;
 
 const Navbar = styled.ul`
@@ -46,25 +42,31 @@ const Navbar = styled.ul`
   align-items: center;
 `;
 
-const ListItem = styled.li<{ isSidebarVisible: boolean; isActive: boolean }>`
+const ListItem = styled.li<{ isActive: boolean; isSidebarVisible: boolean }>`
   display: flex;
-  gap: 1rem;
+  gap: ${({ isSidebarVisible }) => (isSidebarVisible ? "1rem" : "0")};
   align-items: center;
   justify-content: ${({ isSidebarVisible }) =>
     isSidebarVisible ? "flex-start" : "center"};
   padding: 10px;
   width: 100%;
+  height: ${({ isSidebarVisible }) =>
+    isSidebarVisible ? "auto" : "60px"}; // Wysokość w stanie zwiniętym
   cursor: pointer;
   background-color: ${({ isActive, theme }) =>
     isActive ? theme.white : "transparent"};
   border-radius: 50px;
+
   &:hover {
     background-color: ${({ theme }) => theme.hoverBackground};
   }
 `;
 
-const ListItemIcons = styled.img`
+const ListItemIcons = styled.img<{ isSidebarVisible: boolean }>`
   width: 24px;
+  display: block;
+  margin: ${({ isSidebarVisible }) =>
+    isSidebarVisible ? "0" : "auto"}; // Wyśrodkowanie ikony w trybie zwiniętym
 `;
 
 const StyledNavLink = styled(NavLink)<{ isSidebarVisible?: boolean }>`
@@ -74,11 +76,16 @@ const StyledNavLink = styled(NavLink)<{ isSidebarVisible?: boolean }>`
   justify-content: ${({ isSidebarVisible }) =>
     isSidebarVisible ? "flex-start" : "center"};
   text-decoration: none;
-  padding: ${({ isSidebarVisible }) => (isSidebarVisible ? "10px" : "20px")};
+  padding: ${({ isSidebarVisible }) => (isSidebarVisible ? "10px" : "0")};
   width: 100%;
+  height: ${({ isSidebarVisible }) =>
+    isSidebarVisible ? "auto" : "60px"}; // Ustaw wysokość linku
 
   &.active {
-    background-color: transparent;
+    background-color: ${({ theme, isSidebarVisible }) =>
+      isSidebarVisible
+        ? "transparent"
+        : theme.white}; // Aktywne tło w stanie zwiniętym
     color: #000;
 
     img {
@@ -94,11 +101,10 @@ const StyledNavLink = styled(NavLink)<{ isSidebarVisible?: boolean }>`
   }
 `;
 
-const SidebarIcon = styled.img<{ isSidebarVisible: boolean }>`
+const SidebarIcon = styled.img`
   cursor: pointer;
-  display: flex;
-  align-self: flex-end;
   width: 24px;
+  align-self: flex-end;
 `;
 
 const Logo = styled.img<{ isSidebarVisible?: boolean }>`
@@ -109,74 +115,100 @@ const Logo = styled.img<{ isSidebarVisible?: boolean }>`
 `;
 
 const Sidebar: React.FC<SidebarProps> = ({ isMobile, isSidebarVisible }) => {
+  const [isSidebarOpen, setSidebarOpen] = React.useState(isSidebarVisible);
   const location = useLocation();
+
+  const toggleSidebar = () => {
+    setSidebarOpen((prevState) => !prevState);
+  };
 
   return (
     <Background>
-      <Navigation isMobile={isMobile} isSidebarVisible={isSidebarVisible}>
+      <Navigation isSidebarVisible={isSidebarOpen}>
         <Navbar>
-          <ListItem isSidebarVisible={isSidebarVisible} isActive={false}>
-            <Logo src={logo} alt="logo" isSidebarVisible={isSidebarVisible} />
+          <ListItem isActive={false} isSidebarVisible={isSidebarOpen}>
+            <Logo src={logo} alt="logo" isSidebarVisible={isSidebarOpen} />
             <SidebarIcon
               src={sidebar}
-              alt="sidebar"
-              isSidebarVisible={isSidebarVisible}
+              alt="toggle sidebar"
+              onClick={toggleSidebar}
             />
           </ListItem>
           <ListItem
-            isSidebarVisible={isSidebarVisible}
             isActive={location.pathname === "/home"}
+            isSidebarVisible={isSidebarOpen}
           >
-            <StyledNavLink to="/home" isSidebarVisible={isSidebarVisible}>
-              <ListItemIcons src={dashboard} alt="home" />
+            <StyledNavLink to="/home" isSidebarVisible={isSidebarOpen}>
+              <ListItemIcons
+                src={dashboard}
+                alt="home"
+                isSidebarVisible={isSidebarOpen}
+              />
               <span>Strona główna</span>
             </StyledNavLink>
           </ListItem>
           <ListItem
-            isSidebarVisible={isSidebarVisible}
             isActive={location.pathname === "/contractors"}
+            isSidebarVisible={isSidebarOpen}
           >
-            <StyledNavLink
-              to="/contractors"
-              isSidebarVisible={isSidebarVisible}
-            >
-              <ListItemIcons src={contracts} alt="contracts" />
+            <StyledNavLink to="/contractors" isSidebarVisible={isSidebarOpen}>
+              <ListItemIcons
+                src={contracts}
+                alt="contracts"
+                isSidebarVisible={isSidebarOpen}
+              />
               <span>Kontrahenci</span>
             </StyledNavLink>
           </ListItem>
           <ListItem
-            isSidebarVisible={isSidebarVisible}
             isActive={location.pathname === "/stats"}
+            isSidebarVisible={isSidebarOpen}
           >
-            <StyledNavLink to="/stats" isSidebarVisible={isSidebarVisible}>
-              <ListItemIcons src={stats} alt="stats" />
+            <StyledNavLink to="/stats" isSidebarVisible={isSidebarOpen}>
+              <ListItemIcons
+                src={stats}
+                alt="stats"
+                isSidebarVisible={isSidebarOpen}
+              />
               <span>Zgłoszenia</span>
             </StyledNavLink>
           </ListItem>
           <ListItem
-            isSidebarVisible={isSidebarVisible}
             isActive={location.pathname === "/archive"}
+            isSidebarVisible={isSidebarOpen}
           >
-            <StyledNavLink to="/archive" isSidebarVisible={isSidebarVisible}>
-              <ListItemIcons src={archive} alt="archive" />
+            <StyledNavLink to="/archive" isSidebarVisible={isSidebarOpen}>
+              <ListItemIcons
+                src={archive}
+                alt="archive"
+                isSidebarVisible={isSidebarOpen}
+              />
               <span>Archiwum</span>
             </StyledNavLink>
           </ListItem>
           <ListItem
-            isSidebarVisible={isSidebarVisible}
             isActive={location.pathname === "/calendar"}
+            isSidebarVisible={isSidebarOpen}
           >
-            <StyledNavLink to="/calendar" isSidebarVisible={isSidebarVisible}>
-              <ListItemIcons src={calendar} alt="calendar" />
+            <StyledNavLink to="/calendar" isSidebarVisible={isSidebarOpen}>
+              <ListItemIcons
+                src={calendar}
+                alt="calendar"
+                isSidebarVisible={isSidebarOpen}
+              />
               <span>Kalendarz</span>
             </StyledNavLink>
           </ListItem>
           <ListItem
-            isSidebarVisible={isSidebarVisible}
             isActive={location.pathname === "/logout"}
+            isSidebarVisible={isSidebarOpen}
           >
-            <StyledNavLink to="/logout" isSidebarVisible={isSidebarVisible}>
-              <ListItemIcons src={logout} alt="logout" />
+            <StyledNavLink to="/logout" isSidebarVisible={isSidebarOpen}>
+              <ListItemIcons
+                src={logout}
+                alt="logout"
+                isSidebarVisible={isSidebarOpen}
+              />
               <span>Wyloguj</span>
             </StyledNavLink>
           </ListItem>
